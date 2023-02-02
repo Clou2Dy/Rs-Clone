@@ -1,2 +1,0 @@
-(()=>{"use strict";console.log("Hello TypeScript")})();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NyaXB0LmpzIiwibWFwcGluZ3MiOiJtQkFBQUEsUUFBUUMsSUFBSSxtQiIsInNvdXJjZXMiOlsid2VicGFjazovL3JzLWNsb25lLy4vc3JjL2FwcC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJjb25zb2xlLmxvZygnSGVsbG8gVHlwZVNjcmlwdCcpO1xyXG4iXSwibmFtZXMiOlsiY29uc29sZSIsImxvZyJdLCJzb3VyY2VSb290IjoiIn0=
