@@ -12,9 +12,21 @@ export function displaySecurityPage() {
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
     securitiesPage.appendChild(securitiesPageContainer);
+    renderHeaderBlock(securitiesPageContainer);
+    renderStocksBlock(securitiesPageContainer);
+    
 
+    const bondsBlock = createElement('div', 'Облигации', 'bonds-block');
+    securitiesPageContainer.appendChild(bondsBlock);
+    const etfBlock = createElement('div', 'БПИФ', 'etf-block');
+    securitiesPageContainer.appendChild(etfBlock);
+
+    addAddStockButton(securitiesPageContainer);
+}
+
+function renderHeaderBlock(container: HTMLElement){
     const headerPage = createElement('div', null, 'header-block');
-    securitiesPageContainer.appendChild(headerPage);
+    container.appendChild(headerPage);
         const headerBlockName = createElement('div', 'Ценные бумаги', 'header-block__name');
         headerPage.appendChild(headerBlockName);
 
@@ -24,7 +36,6 @@ export function displaySecurityPage() {
             headerBlockSum.appendChild(amountRubles);
             const amountKopecks = createElement('span', ',53 ₽', 'amount-kopecks');
             headerBlockSum.appendChild(amountKopecks);
-
 
         const headerBlockProfit = createElement('div', null, 'header-block__profit');
         headerPage.appendChild(headerBlockProfit);
@@ -49,16 +60,26 @@ export function displaySecurityPage() {
                 periodMonth.style.display = 'none';
                     const periodArrowsUp = createElement('i', null, 'period-arrows_up');
                     periodMonth.appendChild(periodArrowsUp);
+}
 
-    
-    const stockBlock = createElement('div', 'Акции', 'stock-block');
-    securitiesPageContainer.appendChild(stockBlock);
-    const bondsBlock = createElement('div', 'Облигации', 'bonds-block');
-    securitiesPageContainer.appendChild(bondsBlock);
-    const etfBlock = createElement('div', 'БПИФ', 'etf-block');
-    securitiesPageContainer.appendChild(etfBlock);
+function renderStocksBlock(container: HTMLElement) {
+    const stocksBlock = createElement('div', null, 'stock-block');
+    container.appendChild(stocksBlock);
 
-    addAddStockButton(securitiesPageContainer);
+        const titleBlock = createElement('div', null, 'title-stock');
+        stocksBlock.appendChild(titleBlock)
+            const nameTitle = createElement('div', 'Акции', 'name-stock');
+            titleBlock.appendChild(nameTitle);
+            const profitTitle = createElement('div', null, 'profit-stock');
+            titleBlock.appendChild(profitTitle);
+                const resultStock = createElement('span', '+1 102,53 ₽', 'result-stock');
+                profitTitle.appendChild(resultStock)
+                const dotStock = createElement('span', ' / ', 'dot-stock');
+                profitTitle.appendChild(dotStock)
+                const procentStock = createElement('span', '0,56% ', 'procent-stock');
+                profitTitle.appendChild(procentStock)
+        const arrowBlock = createElement('div', null, 'arrow-stock');
+        stocksBlock.appendChild(arrowBlock)
 }
 
 function addAddStockButton(container: HTMLElement) {
