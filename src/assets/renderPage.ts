@@ -1,31 +1,49 @@
 import {createElement} from './functions';
-import {moexTickerLast} from './api';
+import {moexGetTickers} from './api';
 
-moexTickerLast('GAZP').then(console.log);
+let arrayAvailableTickers: Array<[string, string, number]> = [];
+const main = async () => {
+  arrayAvailableTickers = await moexGetTickers('TQBR');
+};
+main();
 
 export function displaySecurityPage() {
-    const securityPage = createElement('div', 'Ценные бумаги', 'security-page');
-    document.body.appendChild(securityPage);
-    const securityPageContainer = createElement('div', null, 'security-page__container');
-    securityPage.appendChild(securityPageContainer);
+    const securitiesPage = createElement('div', 'Ценные бумаги', 'security-page');
+    document.body.appendChild(securitiesPage);
+    const securitiesPageContainer = createElement('div', null, 'security-page__container');
+    securitiesPage.appendChild(securitiesPageContainer);
 
     const stockBlock = createElement('div', 'Акции', 'stock-block');
-    securityPageContainer.appendChild(stockBlock);
+    securitiesPageContainer.appendChild(stockBlock);
     const bondsBlock = createElement('div', 'Облигации', 'bonds-block');
-    securityPageContainer.appendChild(bondsBlock);
+    securitiesPageContainer.appendChild(bondsBlock);
     const etfBlock = createElement('div', 'БПИФ', 'etf-block');
-    securityPageContainer.appendChild(etfBlock);
+    securitiesPageContainer.appendChild(etfBlock);
 
-    addAddStockButton(securityPageContainer);
+    addAddStockButton(securitiesPageContainer);
 }
 
 function addAddStockButton(container: HTMLElement) {
-    const addStockButton = createElement('button', 'Add stock', 'add-stock-button');
+    const addStockButton = createElement('button', 'Добавить', 'add-stock-button');
     container.appendChild(addStockButton);
+    const inputElement = createElement('input', null, 'input-class') as HTMLInputElement;;
+    inputElement.setAttribute('type', 'text');
+    inputElement.addEventListener('input', () => {
+        searchTickers(inputElement);
+    });
+    container.appendChild(inputElement);
 
     addStockButton.addEventListener('click', () => {
         addStocksBlock(container);
     });
+}
+
+function searchTickers(inputElement: HTMLInputElement) {
+    const searchTerm = inputElement.value.toLowerCase();
+    const filteredTickers = arrayAvailableTickers.filter(ticker => {
+      return ticker[1].toLowerCase().includes(searchTerm);
+    });
+    console.log(filteredTickers);
 }
 
 function addStocksBlock(container: HTMLElement) {
