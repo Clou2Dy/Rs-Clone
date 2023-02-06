@@ -10,7 +10,7 @@ export async function moexGetTickers(bord: string) {
   return tickersName;
 }
 
-function extractTickersName(data: Array<Array<string | number>>, searchTerm: string): Array<[string, string, number]> {
+function extractTickersName(data: Array<Array<string | number>>, searchTerm: string): Array<[string, string, string]> {
   return data.filter(subArray => (subArray[1] as string).toUpperCase() === searchTerm.toUpperCase())
-    .map(subArray => [subArray[0] as string, subArray[1] as string, subArray[2] as number]);
+    .map(subArray => [subArray[0] as string, subArray[3] as string, subArray[2] as string]);
 }

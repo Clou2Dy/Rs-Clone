@@ -1,7 +1,7 @@
 import {createElement} from './functions';
 import {moexGetTickers} from './api';
 
-let arrayAvailableTickers: Array<[string, string, number]> = [];
+let arrayAvailableTickers: Array<[string, string, string]> = [];
 const main = async () => {
   arrayAvailableTickers = await moexGetTickers('TQBR');
 };
@@ -41,7 +41,7 @@ function addAddStockButton(container: HTMLElement) {
 function searchTickers(inputElement: HTMLInputElement) {
     const searchTerm = inputElement.value.toLowerCase();
     const filteredTickers = arrayAvailableTickers.filter(ticker => {
-      return ticker[1].toLowerCase().includes(searchTerm);
+      return ticker[2].toLowerCase().includes(searchTerm);
     });
     console.log(filteredTickers);
 }
