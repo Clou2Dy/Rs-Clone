@@ -1,18 +1,56 @@
 import {createElement} from './functions';
 import {moexGetTickers} from './api';
 
-let arrayAvailableTickers: Array<[string, string, string]> = [];
+let arrayAvailableTickers: Array<[string, number, string]> = [];
 const main = async () => {
   arrayAvailableTickers = await moexGetTickers('TQBR');
 };
 main();
 
 export function displaySecurityPage() {
-    const securitiesPage = createElement('div', 'Ценные бумаги', 'security-page');
+    const securitiesPage = createElement('div', null, 'security-page');
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
     securitiesPage.appendChild(securitiesPageContainer);
 
+    const headerPage = createElement('div', null, 'header-block');
+    securitiesPageContainer.appendChild(headerPage);
+        const headerBlockName = createElement('div', 'Ценные бумаги', 'header-block__name');
+        headerPage.appendChild(headerBlockName);
+
+        const headerBlockSum = createElement('div', null, 'header-block__sum');
+        headerPage.appendChild(headerBlockSum);
+            const amountRubles = createElement('span', '194 053', 'amount-rubles');
+            headerBlockSum.appendChild(amountRubles);
+            const amountKopecks = createElement('span', ',53 ₽', 'amount-kopecks');
+            headerBlockSum.appendChild(amountKopecks);
+
+
+        const headerBlockProfit = createElement('div', null, 'header-block__profit');
+        headerPage.appendChild(headerBlockProfit);
+            const profitBlock = createElement('div', null, 'profit-block');
+            headerBlockProfit.appendChild(profitBlock);
+                const profitRubles = createElement('span', '+1 102,53 ₽', 'profit-rubles');
+                profitBlock.appendChild(profitRubles);
+                const profitLine = createElement('span', ' / ', 'profit-line');
+                profitBlock.appendChild(profitLine);
+                const profitProcent = createElement('span', '0,58 %', 'profit-procent');
+                profitBlock.appendChild(profitProcent);
+
+            const periodBlock = createElement('div', null, 'period-block');
+                headerBlockProfit.appendChild(periodBlock);
+                const periodAll = createElement('span', 'за все время ', 'period-all');
+                periodBlock.appendChild(periodAll);
+                    const periodArrowsDown = createElement('i', null, 'period-arrows_down');
+                    periodAll.appendChild(periodArrowsDown);
+
+                const periodMonth = createElement('span', 'за месяц ', 'period-month');
+                periodBlock.appendChild(periodMonth);
+                periodMonth.style.display = 'none';
+                    const periodArrowsUp = createElement('i', null, 'period-arrows_up');
+                    periodMonth.appendChild(periodArrowsUp);
+
+    
     const stockBlock = createElement('div', 'Акции', 'stock-block');
     securitiesPageContainer.appendChild(stockBlock);
     const bondsBlock = createElement('div', 'Облигации', 'bonds-block');
@@ -24,7 +62,7 @@ export function displaySecurityPage() {
 }
 
 function addAddStockButton(container: HTMLElement) {
-    const addStockButton = createElement('button', 'Добавить', 'add-stock-button');
+    const addStockButton = createElement('button', 'Добавить в портфель', 'add-stock-button');
     container.appendChild(addStockButton);
     const inputElement = createElement('input', null, 'input-class') as HTMLInputElement;;
     inputElement.setAttribute('type', 'text');
@@ -33,9 +71,6 @@ function addAddStockButton(container: HTMLElement) {
     });
     container.appendChild(inputElement);
 
-    addStockButton.addEventListener('click', () => {
-        addStocksBlock(container);
-    });
 }
 
 function searchTickers(inputElement: HTMLInputElement) {
@@ -43,7 +78,7 @@ function searchTickers(inputElement: HTMLInputElement) {
     const filteredTickers = arrayAvailableTickers.filter(ticker => {
       return ticker[2].toLowerCase().includes(searchTerm);
     });
-    console.log(filteredTickers);
+    return filteredTickers;
 }
 
 function addStocksBlock(container: HTMLElement) {

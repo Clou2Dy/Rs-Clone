@@ -1,0 +1,62 @@
+.security-page {
+   max-width: 390px;
+   margin: 0 auto;
+   background-color: rgba(243, 243, 243, 0.979);
+}
+.security-page__container {
+    padding: 0 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+.header-block {
+
+}
+
+.header-block__name{
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    padding: 10px 0 10px 0;
+}
+
+.header-block__sum {
+    font-size: 40px;
+}
+.amount-kopecks {
+    color: rgb(183, 188, 192);
+}
+
+.header-block__profit {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profit-rubles{
+    color: rgb(46, 124, 81);
+}
+.profit-line{
+    color: rgb(183, 188, 192);
+}
+.profit-procent{
+    color: rgb(82, 163, 136);
+}
+
+.period-arrows_down,
+.period-arrows_up
+{
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.period-arrows_up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.period-arrows_down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
