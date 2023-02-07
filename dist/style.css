@@ -65,9 +65,9 @@
     -webkit-transform: rotate(45deg);
 }
 
-.stock-block,
-.bond-block,
-.etf-block
+.stock-info,
+.bond-info,
+.etf-info
 {
     display: flex;
     min-height: 50px;
@@ -82,7 +82,7 @@
 .name-bond,
 .name-etf
 {
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .result-stock,
@@ -119,4 +119,14 @@
 
 .dot-block{
     font-size: 10px;
+}
+
+.security-block{
+    display: flex;
+    min-height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(250, 100, 100);
+    margin: 0 -10px 0 -10px;
+    padding: 0 10px 0 10px;
 }

@@ -2,6 +2,7 @@ import {createElement} from './functions';
 import {moexGetTickers, moexTickerLast} from './api';
 import {calculateValueSecurites} from './functions'
 import {securitiesArray} from './data'
+import {displayListSecurities} from './animationPage'
 
 let arrayAvailableTickers: Array<[string, number, string]> = [];
 const main = async () => {
@@ -17,7 +18,7 @@ export function displaySecurityPage() {
     renderHeaderBlock(securitiesPageContainer);
     renderSecurityBlock('Акции', 'stock', securitiesPageContainer);
     renderSecurityBlock('Облигации','bond', securitiesPageContainer);
-    renderSecurityBlock('БПИФ','etf', securitiesPageContainer);
+    renderSecurityBlock('БПИФ', 'etf', securitiesPageContainer);
 }
 
 function renderHeaderBlock(container: HTMLElement){
@@ -61,9 +62,10 @@ function renderHeaderBlock(container: HTMLElement){
 function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
     const block = createElement('div', null, `${type}-block`);
     container.appendChild(block);
-
+    const info = createElement('div', null, `${type}-info`);
+    block.appendChild(info);
         const titleBlock = createElement('div', null, `title-${type}`);
-        block.appendChild(titleBlock)
+        info.appendChild(titleBlock)
             const nameTitle = createElement('div', `${name}`, `name-${type}`);
             titleBlock.appendChild(nameTitle);
             const profitTitle = createElement('div', null, `profit-${type}`);
@@ -75,9 +77,11 @@ function renderSecurityBlock(name: string, type: string, container: HTMLElement)
                 const procentBlock = createElement('span', '0,56%', `procent-${type}`);
                 profitTitle.appendChild(procentBlock)
         const arrowBlock = createElement('div', null, 'arrow-block');
-        block.appendChild(arrowBlock)
-
-        console.log(calculateValueSecurites('Stock', securitiesArray));
+        info.appendChild(arrowBlock)
+    const list = createElement('div', null, `${type}-list`);
+    block.appendChild(list);
+    
+    displayListSecurities(securitiesArray[0], list)
 }
 
 
