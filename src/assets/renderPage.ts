@@ -1,5 +1,7 @@
 import {createElement} from './functions';
-import {moexGetTickers} from './api';
+import {moexGetTickers, moexTickerLast} from './api';
+import {calculateValueSecurites} from './functions'
+import {securitiesArray} from './data'
 
 let arrayAvailableTickers: Array<[string, number, string]> = [];
 const main = async () => {
@@ -13,15 +15,9 @@ export function displaySecurityPage() {
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
     securitiesPage.appendChild(securitiesPageContainer);
     renderHeaderBlock(securitiesPageContainer);
-    renderStocksBlock(securitiesPageContainer);
-    
-
-    const bondsBlock = createElement('div', 'Облигации', 'bonds-block');
-    securitiesPageContainer.appendChild(bondsBlock);
-    const etfBlock = createElement('div', 'БПИФ', 'etf-block');
-    securitiesPageContainer.appendChild(etfBlock);
-
-    addAddStockButton(securitiesPageContainer);
+    renderSecurityBlock('Акции', 'stock', securitiesPageContainer);
+    renderSecurityBlock('Облигации','bond', securitiesPageContainer);
+    renderSecurityBlock('БПИФ','etf', securitiesPageContainer);
 }
 
 function renderHeaderBlock(container: HTMLElement){
@@ -62,25 +58,28 @@ function renderHeaderBlock(container: HTMLElement){
                     periodMonth.appendChild(periodArrowsUp);
 }
 
-function renderStocksBlock(container: HTMLElement) {
-    const stocksBlock = createElement('div', null, 'stock-block');
-    container.appendChild(stocksBlock);
+function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
+    const block = createElement('div', null, `${type}-block`);
+    container.appendChild(block);
 
-        const titleBlock = createElement('div', null, 'title-stock');
-        stocksBlock.appendChild(titleBlock)
-            const nameTitle = createElement('div', 'Акции', 'name-stock');
+        const titleBlock = createElement('div', null, `title-${type}`);
+        block.appendChild(titleBlock)
+            const nameTitle = createElement('div', `${name}`, `name-${type}`);
             titleBlock.appendChild(nameTitle);
-            const profitTitle = createElement('div', null, 'profit-stock');
+            const profitTitle = createElement('div', null, `profit-${type}`);
             titleBlock.appendChild(profitTitle);
-                const resultStock = createElement('span', '+1 102,53 ₽', 'result-stock');
-                profitTitle.appendChild(resultStock)
-                const dotStock = createElement('span', ' / ', 'dot-stock');
-                profitTitle.appendChild(dotStock)
-                const procentStock = createElement('span', '0,56% ', 'procent-stock');
-                profitTitle.appendChild(procentStock)
-        const arrowBlock = createElement('div', null, 'arrow-stock');
-        stocksBlock.appendChild(arrowBlock)
+                const resultBlock = createElement('span', `11 537,56 ₽`, `result-${type}`);
+                profitTitle.appendChild(resultBlock)
+                const dotBlock = createElement('span', ' / ', 'dot-block');
+                profitTitle.appendChild(dotBlock)
+                const procentBlock = createElement('span', '0,56%', `procent-${type}`);
+                profitTitle.appendChild(procentBlock)
+        const arrowBlock = createElement('div', null, 'arrow-block');
+        block.appendChild(arrowBlock)
+
+        console.log(calculateValueSecurites('Stock', securitiesArray));
 }
+
 
 function addAddStockButton(container: HTMLElement) {
     const addStockButton = createElement('button', 'Добавить в портфель', 'add-stock-button');

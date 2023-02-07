@@ -3,6 +3,7 @@
 }
 .security-page {
    max-width: 390px;
+   min-height: 100%;
    margin: 0 auto;
    background-color: rgba(243, 243, 243, 0.979);
 }
@@ -11,9 +12,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px
-}
-.header-block {
-
 }
 
 .header-block__name{
@@ -67,8 +65,10 @@
     -webkit-transform: rotate(45deg);
 }
 
-
-.stock-block{
+.stock-block,
+.bond-block,
+.etf-block
+{
     display: flex;
     min-height: 50px;
     justify-content: space-between;
@@ -78,7 +78,35 @@
     padding: 0 10px 0 10px;
 }
 
-.arrow-stock {
+.name-stock,
+.name-bond,
+.name-etf
+{
+    font-size: 25px;
+}
+
+.result-stock,
+.result-bond,
+.result-etf
+{
+    color: rgb(183, 188, 192);
+    font-size: 10px;
+}
+
+.procent-stock,
+.procent-bond,
+.procent-etf
+{
+    font-size: 10px;
+    color:rgb(46, 124, 81);
+}
+
+.profit-stock {
+    
+    font-weight: 700;
+}
+
+.arrow-block {
     width: 1px;
     height: 1px;
     border: solid rgb(102, 102, 102);
@@ -89,11 +117,6 @@
     -webkit-transform: rotate(45deg);
 }
 
-.profit-stock {
+.dot-block{
     font-size: 10px;
-    font-weight: 700;
-}
-
-.procent-stock{
-    color:rgb(46, 124, 81);
 }
