@@ -1,16 +1,13 @@
 import {createElement} from './functions';
-import {moexGetTickers, moexTickerLast} from './api';
+import {moexGetTickerPrice} from './api';
 import {calculateValueSecurites} from './functions'
-import {securitiesArray} from './data'
+import {securitiesArray, updateSecuritiesArray} from './data'
 import {displayListSecurities} from './animationPage'
 
-let arrayAvailableTickers: Array<[string, number, string]> = [];
-const main = async () => {
-  arrayAvailableTickers = await moexGetTickers('TQBR');
-};
-main();
+
 
 export function displaySecurityPage() {
+    updateSecuritiesArray(securitiesArray);
     const securitiesPage = createElement('div', null, 'security-page');
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
@@ -91,12 +88,12 @@ function addAddStockButton(container: HTMLElement) {
     const inputElement = createElement('input', null, 'input-class') as HTMLInputElement;;
     inputElement.setAttribute('type', 'text');
     inputElement.addEventListener('input', () => {
-        searchTickers(inputElement);
+        //searchTickers(inputElement);
     });
     container.appendChild(inputElement);
 
 }
-
+/*
 function searchTickers(inputElement: HTMLInputElement) {
     const searchTerm = inputElement.value.toLowerCase();
     const filteredTickers = arrayAvailableTickers.filter(ticker => {
@@ -109,3 +106,4 @@ function addStocksBlock(container: HTMLElement) {
     const stocksBlock = createElement('div', 'Stocks', 'stocks-block');
     container.appendChild(stocksBlock);
 }
+*/
