@@ -1,24 +1,23 @@
 import {createElement} from './functions';
-import {moexGetTickerPrice} from './api';
-import {calculateValueSecurites} from './functions'
+import {calculateTotalSum, calculateTotalProfit} from './functions'
 import {securitiesArray, updateSecuritiesArray} from './data'
 import {displayListSecurities} from './animationPage'
 
-
-
-export function displaySecurityPage() {
-    updateSecuritiesArray(securitiesArray);
+export async function displaySecurityPage() {
     const securitiesPage = createElement('div', null, 'security-page');
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
     securitiesPage.appendChild(securitiesPageContainer);
-    renderHeaderBlock(securitiesPageContainer);
+    await renderHeaderBlock(securitiesPageContainer);
     renderSecurityBlock('Акции', 'stock', securitiesPageContainer);
     renderSecurityBlock('Облигации','bond', securitiesPageContainer);
     renderSecurityBlock('БПИФ', 'etf', securitiesPageContainer);
 }
 
-function renderHeaderBlock(container: HTMLElement){
+async function renderHeaderBlock(container: HTMLElement){
+    const lastPriceArray = await updateSecuritiesArray(securitiesArray);
+    const totalSum = calculateTotalSum (lastPriceArray);
+    const totalResult = +calculateTotalProfit(lastPriceArray).toFixed(2);
     const headerPage = createElement('div', null, 'header-block');
     container.appendChild(headerPage);
         const headerBlockName = createElement('div', 'Ценные бумаги', 'header-block__name');
@@ -26,20 +25,20 @@ function renderHeaderBlock(container: HTMLElement){
 
         const headerBlockSum = createElement('div', null, 'header-block__sum');
         headerPage.appendChild(headerBlockSum);
-            const amountRubles = createElement('span', '194 053', 'amount-rubles');
+            const amountRubles = createElement('span', `${Math.trunc(totalSum)}`, 'amount-rubles');
             headerBlockSum.appendChild(amountRubles);
-            const amountKopecks = createElement('span', ',53 ₽', 'amount-kopecks');
+            const amountKopecks = createElement('span', `,${Math.floor((totalSum % 1) * Math.pow(10, 2))} ₽`, 'amount-kopecks');
             headerBlockSum.appendChild(amountKopecks);
 
         const headerBlockProfit = createElement('div', null, 'header-block__profit');
         headerPage.appendChild(headerBlockProfit);
             const profitBlock = createElement('div', null, 'profit-block');
             headerBlockProfit.appendChild(profitBlock);
-                const profitRubles = createElement('span', '+1 102,53 ₽', 'profit-rubles');
+                const profitRubles = createElement('span', `${totalResult} ₽`, 'profit-rubles');
                 profitBlock.appendChild(profitRubles);
                 const profitLine = createElement('span', ' / ', 'profit-line');
                 profitBlock.appendChild(profitLine);
-                const profitProcent = createElement('span', '0,58 %', 'profit-procent');
+                const profitProcent = createElement('span', `${(100*(totalResult / totalSum)).toFixed(2)} %`, 'profit-procent');
                 profitBlock.appendChild(profitProcent);
 
             const periodBlock = createElement('div', null, 'period-block');

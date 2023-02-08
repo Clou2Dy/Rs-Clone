@@ -5,5 +5,6 @@ export interface Security {
     purchaseDate: Date;
     purchasePrice: number;
     amount: number;
+    lastPrice?: number;
 }
 

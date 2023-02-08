@@ -12,26 +12,23 @@ export function createElement(tag: string, text: string | null, className: strin
     return element;
 }
 
-export function calculateSumAmount (type: 'Stock' | 'Bond' | 'ETF', array: Security[]) {
+
+export function calculateTotalSum (array: Security[]) {
     let sum = 0;
-    array.filter(obj => {
-        if(obj.type === type) {
-            sum += obj.amount * obj.purchasePrice;
+    array.forEach(el => {
+        if (el.lastPrice) {
+            sum += el.amount * el.lastPrice;
         }
     })
     return sum
 }
 
-export function calculateValueSecurites (type: 'Stock' | 'Bond' | 'ETG', array: Security[]) {
-    array.filter(obj => {
-        let sum = 0;
-        if(obj.type === type) {
-            moexTickerLast(obj.ticker).then(res => {
-                console.log(res)
-                sum += obj.amount * res
-                console.log(sum)       
-            });          
+export function calculateTotalProfit (array: Security[]) {
+    let sum = 0;
+    array.forEach(el => {
+        if (el.lastPrice) {
+            sum += el.amount * (el.lastPrice - el.purchasePrice);
         }
-        return sum;
     })
+    return sum
 }

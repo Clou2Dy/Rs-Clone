@@ -13,7 +13,6 @@ export async function updateSecuritiesArray(securitiesArray: Security[]) {
         return { ...security, lastPrice: price };
       })
     );
-    console.dir(updatedArray);
     return updatedArray;
 }
 
