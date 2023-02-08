@@ -17,7 +17,7 @@
 .header-block__name{
     display: flex;
     justify-content: center;
-    font-size: 14px;
+    font-size: 20px;
     padding: 10px 0 10px 0;
 }
 
@@ -102,7 +102,6 @@
 }
 
 .profit-stock {
-    
     font-weight: 700;
 }
 
@@ -126,7 +125,37 @@
     min-height: 50px;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(250, 100, 100);
+    background: linear-gradient(180deg, #e9e9e9, #dae3e7);
     margin: 0 -10px 0 -10px;
     padding: 0 10px 0 10px;
 }
+.security-amount {
+    font-size: 14px;
+    color: rgb(102, 102, 102);
+}
+.security-fin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.security-profit {
+    display: flex;
+    font-size: 10px;
+}
+
+.security-price {
+    display: flex;
+    font-size: 12px;
+}
+
+.security-profit {
+    display: flex;
+    font-size: 10px;
+}
+
+.security-result,
+.security-procent
+{
+    color: rgb(46, 124, 81);
+}
+

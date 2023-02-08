@@ -1,5 +1,5 @@
 export interface Security {
-    type: 'Stock' | 'Bond' | 'ETF';
+    type: 'stock' | 'bond' | 'etf';
     ticker: string;
     name: string;
     purchaseDate: Date;

@@ -9,9 +9,9 @@ export async function displaySecurityPage() {
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
     securitiesPage.appendChild(securitiesPageContainer);
     await renderHeaderBlock(securitiesPageContainer);
-    renderSecurityBlock('Акции', 'stock', securitiesPageContainer);
-    renderSecurityBlock('Облигации','bond', securitiesPageContainer);
-    renderSecurityBlock('БПИФ', 'etf', securitiesPageContainer);
+    await renderSecurityBlock('Акции', 'stock', securitiesPageContainer);
+    await renderSecurityBlock('Облигации','bond', securitiesPageContainer);
+    await renderSecurityBlock('БПИФ', 'etf', securitiesPageContainer);
 }
 
 async function renderHeaderBlock(container: HTMLElement){
@@ -55,7 +55,12 @@ async function renderHeaderBlock(container: HTMLElement){
                     periodMonth.appendChild(periodArrowsUp);
 }
 
-function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
+async function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
+    const getTypeArray = securitiesArray.filter(el => el.type === type)
+    const lastPriceArray = await updateSecuritiesArray(getTypeArray);
+    const totalSum = calculateTotalSum (lastPriceArray);
+    const totalResult = +calculateTotalProfit(lastPriceArray).toFixed(2);
+    console.log(lastPriceArray);
     const block = createElement('div', null, `${type}-block`);
     container.appendChild(block);
     const info = createElement('div', null, `${type}-info`);
@@ -66,18 +71,17 @@ function renderSecurityBlock(name: string, type: string, container: HTMLElement)
             titleBlock.appendChild(nameTitle);
             const profitTitle = createElement('div', null, `profit-${type}`);
             titleBlock.appendChild(profitTitle);
-                const resultBlock = createElement('span', `11 537,56 ₽`, `result-${type}`);
+                const resultBlock = createElement('span', `${totalSum.toFixed(2)} ₽`, `result-${type}`);
                 profitTitle.appendChild(resultBlock)
                 const dotBlock = createElement('span', ' / ', 'dot-block');
                 profitTitle.appendChild(dotBlock)
-                const procentBlock = createElement('span', '0,56%', `procent-${type}`);
+                const procentBlock = createElement('span', `${(100*(totalResult / totalSum)).toFixed(2)} %`, `procent-${type}`);
                 profitTitle.appendChild(procentBlock)
         const arrowBlock = createElement('div', null, 'arrow-block');
         info.appendChild(arrowBlock)
     const list = createElement('div', null, `${type}-list`);
     block.appendChild(list);
-    
-    displayListSecurities(securitiesArray[0], list)
+    lastPriceArray.forEach(el => displayListSecurities(el, list))
 }
 
 
