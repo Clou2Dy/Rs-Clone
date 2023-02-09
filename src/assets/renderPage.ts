@@ -1,7 +1,9 @@
 import {createElement} from './functions';
 import {calculateTotalSum, calculateTotalProfit} from './functions'
 import {securitiesArray, updateSecuritiesArray} from './data'
+import {getStocksTickers} from './api'
 import {displayListSecurities} from './animationPage'
+import {renderSearchPage} from './searchPage'
 
 export async function displaySecurityPage() {
     const securitiesPage = createElement('div', null, 'security-page');
@@ -9,6 +11,7 @@ export async function displaySecurityPage() {
     const securitiesPageContainer = createElement('div', null, 'security-page__container');
     securitiesPage.appendChild(securitiesPageContainer);
     await renderHeaderBlock(securitiesPageContainer);
+    await renderAddButton(securitiesPageContainer);
     await renderSecurityBlock('Акции', 'stock', securitiesPageContainer);
     await renderSecurityBlock('Облигации','bond', securitiesPageContainer);
     await renderSecurityBlock('БПИФ', 'etf', securitiesPageContainer);
@@ -60,7 +63,6 @@ async function renderSecurityBlock(name: string, type: string, container: HTMLEl
     const lastPriceArray = await updateSecuritiesArray(getTypeArray);
     const totalSum = calculateTotalSum (lastPriceArray);
     const totalResult = +calculateTotalProfit(lastPriceArray).toFixed(2);
-    console.log(lastPriceArray);
     const block = createElement('div', null, `${type}-block`);
     container.appendChild(block);
     const info = createElement('div', null, `${type}-info`);
@@ -85,26 +87,31 @@ async function renderSecurityBlock(name: string, type: string, container: HTMLEl
 }
 
 
-function addAddStockButton(container: HTMLElement) {
-    const addStockButton = createElement('button', 'Добавить в портфель', 'add-stock-button');
-    container.appendChild(addStockButton);
-    const inputElement = createElement('input', null, 'input-class') as HTMLInputElement;;
+async function renderAddButton(container: HTMLElement) {
+    const addButtonContainer = createElement('div', null, 'add-button__container');
+    container.appendChild(addButtonContainer);
+    const inputElement = createElement('input', null, 'input-sec') as HTMLInputElement;
+    inputElement.defaultValue = 'Компания, тикер, ISIN';
     inputElement.setAttribute('type', 'text');
-    inputElement.addEventListener('input', () => {
-        //searchTickers(inputElement);
+    const securityPage = document.querySelector('.security-page') as HTMLElement;
+    const searchPage = document.querySelector('.search-page') as HTMLElement;
+    const arrayAvailableTickers = await getStocksTickers()
+    inputElement.addEventListener('click', () => {
+        securityPage.style.display = 'none';
+        renderSearchPage()
     });
-    container.appendChild(inputElement);
-
+    addButtonContainer.appendChild(inputElement);
 }
-/*
-function searchTickers(inputElement: HTMLInputElement) {
+
+function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string | number>>) {
     const searchTerm = inputElement.value.toLowerCase();
-    const filteredTickers = arrayAvailableTickers.filter(ticker => {
-      return ticker[2].toLowerCase().includes(searchTerm);
+    const filteredTickers = array.filter((elem: Array<string | number>) => {
+      return (elem[2] as string).toLowerCase().includes(searchTerm);
     });
+    console.log(filteredTickers)
     return filteredTickers;
 }
-
+/*
 function addStocksBlock(container: HTMLElement) {
     const stocksBlock = createElement('div', 'Stocks', 'stocks-block');
     container.appendChild(stocksBlock);

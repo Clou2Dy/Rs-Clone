@@ -16,3 +16,5 @@ export async function updateSecuritiesArray(securitiesArray: Security[]) {
     return updatedArray;
 }
 
+
+

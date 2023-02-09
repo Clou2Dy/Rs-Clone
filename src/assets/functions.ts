@@ -12,7 +12,6 @@ export function createElement(tag: string, text: string | null, className: strin
     return element;
 }
 
-
 export function calculateTotalSum (array: Security[]) {
     let sum = 0;
     array.forEach(el => {
