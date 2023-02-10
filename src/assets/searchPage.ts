@@ -44,27 +44,43 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
 
 function renderTickers(filteredStoks: Array<Array<string | number>>) {
     const parentElement = document.querySelector('.securities-block');
-    while (parentElement?.firstChild) {
-        parentElement.removeChild(parentElement.firstChild);
+    if (parentElement) {
+        while (parentElement?.firstChild) {
+            parentElement.removeChild(parentElement.firstChild);
+        }
+        const headerStocks = createElement ('div', 'АКЦИИ', 'header-stocks')
+        parentElement.appendChild(headerStocks);
+        const stocksBlock = createElement ('div', null, 'stocks-block')
+        parentElement.appendChild(stocksBlock);
+        const stocksBlocContainer = createElement ('div', null, 'stocks-block__container')
+        stocksBlock.appendChild(stocksBlocContainer);       
+    
+        filteredStoks.forEach((stock: Array<string | number>) => {
+            const stockElement = createElement('div', null, 'stock-element');
+            stocksBlocContainer.appendChild(stockElement);
+            
+            const stockRow = createElement('div', null, 'stock-row');
+            stockElement.appendChild(stockRow);
+
+            const stockInform = createElement('div', null, 'stock-inform');
+            stockRow.appendChild(stockInform);
+                const stockName = createElement('div', `${stock[2]}`, 'stock-name');
+                stockInform.appendChild(stockName);
+                const stockTicker = createElement('div', `${stock[0]}`, 'stock-ticker');
+                stockInform.appendChild(stockTicker);
+                
+            const stockQuotes = createElement('div', null, 'stock-quotes');
+            stockRow.appendChild(stockQuotes);
+                const stockLastPrice = createElement('div', `${stock[15]} ₽`, 'stock-last');
+                stockQuotes.appendChild(stockLastPrice);
+                const procent = (100 * (+stock[3] - +stock[15]) / (+stock[15])).toFixed(2);
+                if (+procent > 0) {
+                    const stockPrevPrice = createElement('div', `${procent} %`, 'stock-prev_green');
+                    stockQuotes.appendChild(stockPrevPrice);
+                } else {
+                    const stockPrevPrice = createElement('div', `${procent} %`, 'stock-prev_red');
+                    stockQuotes.appendChild(stockPrevPrice);
+                }  
+        });
     }
-    const headerStocks = createElement ('div', 'Акции', 'header-stocks')
-    parentElement?.appendChild(headerStocks);
-
-    filteredStoks.forEach((stock: Array<string | number>) => {
-        const stockElement = createElement('div', null, 'stock-info');
-
-        const stockName = createElement('div', `${stock[2]}`, 'stock-name');
-        stockElement.appendChild(stockName);
-
-        const stockTicker = createElement('div', `${stock[0]}`, 'stock-ticker');
-        stockElement.appendChild(stockTicker);
-
-        const stockLastPrice = createElement('div', `${stock[15]}`, 'stock-last');
-        stockElement.appendChild(stockLastPrice);
-
-        const stockPrevPrice = createElement('div', `${stock[3]}`, 'stock-prev');
-        stockElement.appendChild(stockPrevPrice);
-
-        parentElement?.appendChild(stockElement);
-    });
 }
