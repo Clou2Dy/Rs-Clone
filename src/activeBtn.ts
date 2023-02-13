@@ -3,7 +3,7 @@ export function butt(){
         let day =  document.querySelector('.expensesDay')
         let tom = document.querySelector('.expensesTom')
         let last = document.querySelector('.expensesLast')
-        document.querySelector('.expensesDay')?.addEventListener('click', ()=>{
+        document.querySelector('.expensesDay')!.addEventListener('click', ()=>{
             document.querySelector<HTMLElement>('.expensesDay')!.classList.toggle('back')
         })
     })
@@ -13,15 +13,6 @@ export function disabledButt (){
     let butt:any = document.querySelector('.disa')
     let val:any = document.querySelector('.inpMoney')
     butt.setAttribute('disabled', true)
-    function checkInp(){
-        if(val!.value.length <= 1){
-            butt.setAttribute('disabled', true)
-        }else {
-            butt.removeAttribute('disabled')
-        }
-        setInterval(checkInp, 1000)
-    }
-    checkInp()
     butt.addEventListener('click', ()=>{
         console.log( document.querySelector('.money'));
         let suma = Number(val!.value)
@@ -36,6 +27,14 @@ export function disabledButt (){
         
     })
 }
-// function rgb(arg0: number, arg1: number, arg2: number): string {
-//     throw new Error("Function not implemented.")
-// }
+
+export function checkInp(){
+   document.querySelector('.inpMoney').addEventListener('input',function(){
+    if(document.querySelector<HTMLInputElement>('.inpMoney').value.length === 0){
+        document.querySelector<HTMLButtonElement>('.disa').disabled = true 
+    }else{
+        document.querySelector<HTMLButtonElement>('.disa').disabled = false
+    }
+   })  
+}
+

@@ -1,4 +1,4 @@
-import { butt, disabledButt } from "./activeBtn"
+import { butt, disabledButt, checkInp } from "./activeBtn"
 export  function addSpending (){
     document.querySelector('.addExpenses')?.addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'block'
@@ -15,6 +15,7 @@ export  function addSpending (){
     })
     butt()
     disabledButt()
+    checkInp()
 }
 
 
