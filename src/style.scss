@@ -237,35 +237,6 @@ flex-direction: column;
       .imgName{
         margin-top: 40px
       }
-      .cafe{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/cafe-50.png');
-      }
-      .hom{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/home-page-50.png'); 
-      }
-    
-      .heal{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/hospital-50.png');
-      }
-      .family{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/family-50.png');
-      }
-      .education{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/school-50.png');
-      }
-      .gift{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/gift-50.png');
-      }
-      .question{
-        @extend %imgForm;
-        @include imgUrl('../src/assets/mark-50.png');
-      }
     }
   }
   .rowDate{
@@ -306,21 +277,5 @@ flex-direction: column;
     .imgName{
       margin-top: 40px
     }
-  // .bank{
-  //   @extend %imgForm;
-  //   @include imgUrl('../src/assets/money-box-50.png');
-  // }
-  // .present{
-  //   @extend %imgForm;
-  //   @include imgUrl('../src/assets/cash-in-hand-50.png');
-  // }
-  // .salary{
-  //   @extend %imgForm;
-  //   @include imgUrl('../src/assets/cash-50.png');
-  // }
-  // .other{
-  //   @extend %imgForm;
-  //   @include imgUrl('../src/assets/mark-50.png');
-  // }
 }
 }
