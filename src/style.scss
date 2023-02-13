@@ -1,0 +1,326 @@
+html{
+  height: 100%;
+}
+@mixin white {
+  color: white;
+}
+@mixin imgUrl($i) {
+  background-image: url($i);
+}
+%imgForm {
+  // width: 50px;
+  // height: 50px;
+  background-repeat: no-repeat;
+}
+.back{
+  background-color:#3d6b56 ;
+}
+.backBlock{
+  background-color:#3d6b56 ;
+  border-radius: 20px;
+}
+
+body{
+  background-color: rgb(36, 36, 36);
+  
+}
+.zatemFon{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  background-color: #000;
+  z-index: 100;
+}
+.headRow{
+  width: 100%;
+}
+.underline{
+  position: relative;
+}
+.underline:hover:before {
+  transform: scaleX(1);
+  transition: transform 0.25s;
+  transform-origin: left;
+}
+.underline:before{
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  position: absolute;
+  left: 0; bottom: -1px;
+  transform: scaleX(0);
+  transition: transform 0.25s;
+  transform-origin: right;
+}
+// @media (min-width: 390px){
+  .bigCont{
+    text-align: center;
+    padding: 0px;
+    @include white;
+    height: 95px;
+    .headRow{
+      background-color: rgb(19, 56, 39);
+      margin: 0px;
+      height: 120px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      gap: 20px;
+      .col-sm-6{
+        width: 200px;
+      }
+      h2{
+        margin: 0px;
+        margin-top: 10px;
+      }
+      h3{
+        margin: 0px;
+      }
+      h4{
+        margin: 0px;
+      }
+      .colContent{
+        width: 100%;
+        .rowExpens{
+          margin: 0px;
+          display: flex;
+          gap:10px;
+          justify-content: center;
+        }
+      }
+    }
+  }
+// }
+
+.blockInfo{
+  display: flex;
+  justify-content: center;
+  @include white;
+  
+  // height: auto;
+  .info{
+    width: 90%;
+    background-color: rgb(46, 51, 49);
+    border-radius: 20px;
+    display: flexbox;
+    .timeInterval{
+      ul{
+        display: flex;
+        list-style: none;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 14px;
+        gap: 10%;
+        padding: 0px;
+      }
+    }
+    .interval{
+      width: 150px;
+      height: 20px;
+      margin-left: 45%;
+    }
+  }
+  .expenses{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .progress{
+      width: 96%;
+      margin: 0 2% 0 2%;
+    }
+    .addExpenses{
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-left: auto;
+      position: relative;
+      bottom: 10px;
+      right: 10px;
+      display:inline-block;
+      background:
+        linear-gradient(rgb(0, 0, 0),rgb(0, 0, 0)),
+        linear-gradient(rgb(0, 0, 0),rgb(0, 0, 0)),
+        yellow;
+      background-position:center;
+      background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
+      background-repeat:no-repeat;
+      
+    }
+  }
+}
+.spending{
+display: flex;
+flex-direction: column;
+.block{
+    width: 90%;
+    margin: 8px 5% 0px 5%;
+    height: 50px;
+    background-color: rgb(46, 51, 49);
+    border-radius: 10px;
+    // .imgDiv{
+    //   width: 100%;
+    //   height: 100%;
+    //   background-image: url(/src/assets/family-50.jpg);
+    //   background-repeat: no-repeat;
+    // }
+  }
+  
+}
+
+
+.changeMoney{
+  position: absolute;
+  padding: 20px;
+  width: 60%;
+  background-color: rgb(43, 54, 54);
+  top: 26%;
+  left: 20%;
+  border-radius: 10px;
+  border: solid 2px black; 
+  // display: none;
+  z-index: 101;
+  @include white;
+  .headMenu{
+    text-align: center;
+    .arrow {
+      position: absolute;
+      border: solid rgb(253, 253, 253);
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+      top: 1%;
+      left: 3%;
+    }
+    .left {
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+    }
+    // p{
+    //   height: 20px;
+    //   width: 100%;
+    // }
+    input{
+      width: 90px;
+      height: 20px;
+      top: 10%;
+      color: rgb(5, 156, 81);
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid rgb(5, 156, 81) ;
+    }
+  }
+    .rashod{
+    display: block;
+    flex-direction: column;
+    // display: none;
+    padding-top: 15px;
+    margin-top: 40px;
+    .tagCategori{
+      color: grey;
+    }
+    .categoriExpenses{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      .backImg{
+        display: flex;
+        justify-content: center;
+        
+      }
+      .imgName{
+        margin-top: 40px
+      }
+      .cafe{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/cafe-50.png');
+      }
+      .hom{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/home-page-50.png'); 
+      }
+    
+      .heal{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/hospital-50.png');
+      }
+      .family{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/family-50.png');
+      }
+      .education{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/school-50.png');
+      }
+      .gift{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/gift-50.png');
+      }
+      .question{
+        @extend %imgForm;
+        @include imgUrl('../src/assets/mark-50.png');
+      }
+    }
+  }
+  .rowDate{
+    margin-top: 30px;
+    .date{
+      width: 80px;
+      text-align: center;
+      border: solid 1px #3d6b56;
+      border-radius: 10px;
+    }
+    .back{
+      background-color:#3d6b56 ;
+    }
+  }
+  .inpCom{
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid rgb(91, 100, 96) ;
+  }
+  .btn-success{
+    margin-top: 10px;
+  }
+}
+.doxod{
+  width: 100%;
+  height: 100%;
+  display: block;
+  flex-direction: column;
+  display: none;
+  padding-top: 15px;
+  margin-top: 40px;
+  .categoriExpenses{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .imgName{
+      margin-top: 40px
+    }
+  // .bank{
+  //   @extend %imgForm;
+  //   @include imgUrl('../src/assets/money-box-50.png');
+  // }
+  // .present{
+  //   @extend %imgForm;
+  //   @include imgUrl('../src/assets/cash-in-hand-50.png');
+  // }
+  // .salary{
+  //   @extend %imgForm;
+  //   @include imgUrl('../src/assets/cash-50.png');
+  // }
+  // .other{
+  //   @extend %imgForm;
+  //   @include imgUrl('../src/assets/mark-50.png');
+  // }
+}
+}
