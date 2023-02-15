@@ -4,9 +4,6 @@ html{
 @mixin white {
   color: white;
 }
-@mixin imgUrl($i) {
-  background-image: url($i);
-}
 %imgForm {
   // width: 50px;
   // height: 50px;
@@ -193,10 +190,11 @@ flex-direction: column;
       position: absolute;
       border: solid rgb(253, 253, 253);
       border-width: 0 3px 3px 0;
-      display: inline-block;
+      // display: in/line-block;
       padding: 3px;
       top: 1%;
       left: 3%;
+      width: 0px;
     }
     .left {
       transform: rotate(135deg);
@@ -229,13 +227,21 @@ flex-direction: column;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       .backImg{
         display: flex;
         justify-content: center;
+        text-align: center;
+        .fon{
+          // width: 35%;
+          // height: 30%;
+          border-radius: 10px;
+          img{
+            width: 50px;
+            height: 50px;
+          }
+        }
         
-      }
-      .imgName{
-        margin-top: 40px
       }
     }
   }
@@ -270,12 +276,13 @@ flex-direction: column;
   display: none;
   padding-top: 15px;
   margin-top: 40px;
-  .categoriExpenses{
+  .categoriExpenses1{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     .imgName{
-      margin-top: 40px
+      width: 50px;
+      margin-top: 40px;
     }
 }
 }

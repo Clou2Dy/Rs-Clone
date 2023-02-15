@@ -21,30 +21,27 @@ export  function addSpending (){
 
 export  function addUnd() {
     document.addEventListener('click',(el:any)=>{
-        let id = el.target.id 
-        if(el.target.classList.contains('back') == true){
-            // document.getElementById(id)!.classList.remove('back')
-        }else if (el.target.classList.contains('date') == true){
+        if (el.target.classList.contains('date') === true){
             document.getElementById('expensesDay')!.classList.remove('back')
             document.getElementById('expensesTom')!.classList.remove('back')
             document.getElementById('expensesLast')!.classList.remove('back')
-            document.getElementById(id)!.classList.add('back')
-            // document.querySelectorAll('.date')
+            document.getElementById(el.target.id)!.classList.add('back')
+
         }       
     })
     document.addEventListener('click',(el:any)=>{ 
-        let id = el.target.id 
-        if(el.target.classList.contains('backImg') == true){
-            document.getElementById(id)!.classList.add('backBlock')
-            console.log(id);
+        let parent = document.getElementById('rashod').children 
+        if(el.target.classList.contains('backImg') === true || el.target.classList.contains('fon') === true){
+            // let back = el.target.classList
+            // for(let i = 0; i < parent.length; i++){
+            //     parent[i].classList.remove('backBlock')
+            // }
+            document.querySelector(el.target.children).classList.add('backBlock')
+            console.log(el.target.children);
             
-        }
-        // else if (el.target.classList.contains('date') == true){
-        //     document.getElementById('expensesDay')!.classList.remove('back')
-        //     document.getElementById('expensesTom')!.classList.remove('back')
-        //     document.getElementById('expensesLast')!.classList.remove('back')
-        //     document.getElementById(id)!.classList.add('back')
-        //     // document.querySelectorAll('.date')
-        // }       
+        }else{
+            return console.log('None');
+            
+        }   
     })
 }
