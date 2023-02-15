@@ -23,10 +23,8 @@ export function checkInp():void{
 
 export function disabledButt (){
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
-        let val:string = document.querySelector<HTMLInputElement>('.inpMoney').value
-        // let money:string = document.querySelector('.money')
-        // console.log(money);
-      
-  
+        let money:number = +document.querySelector('.money').textContent
+        let val:number = +document.querySelector<HTMLInputElement>('.inpMoney').value
+        document.querySelector('.money').textContent = String(money+val)
     })
 }
