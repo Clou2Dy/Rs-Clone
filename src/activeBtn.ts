@@ -9,22 +9,24 @@ export function butt(){
     })
     
 }
+
+export function checkInp():void{
+    document.querySelector<HTMLButtonElement>('.disa').disabled = true 
+    document.querySelector('.inpMoney').addEventListener('input',function(){
+        if(document.querySelector<HTMLInputElement>('.inpMoney').value.length === 0){
+            document.querySelector<HTMLButtonElement>('.disa').disabled = true 
+        }else{
+            document.querySelector<HTMLButtonElement>('.disa').disabled = false
+        }
+    })  
+}
+
 export function disabledButt (){
-    let val:any = document.querySelector('.inpMoney')
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
+        let val:string = document.querySelector<HTMLInputElement>('.inpMoney').value
+        // let money:string = document.querySelector('.money')
+        // console.log(money);
       
   
     })
 }
-
-export function checkInp():void{
-   document.querySelector<HTMLButtonElement>('.disa').disabled = true 
-   document.querySelector('.inpMoney').addEventListener('input',function(){
-    if(document.querySelector<HTMLInputElement>('.inpMoney').value.length === 0){
-        document.querySelector<HTMLButtonElement>('.disa').disabled = true 
-    }else{
-        document.querySelector<HTMLButtonElement>('.disa').disabled = false
-    }
-   })  
-}
-

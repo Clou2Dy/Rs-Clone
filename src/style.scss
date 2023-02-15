@@ -72,7 +72,7 @@ body{
       }
       h2{
         margin: 0px;
-        margin-top: 10px;
+        // margin-top: 10px;
       }
       h3{
         margin: 0px;
@@ -186,11 +186,11 @@ flex-direction: column;
   @include white;
   .headMenu{
     text-align: center;
+    justify-content: center;
     .arrow {
       position: absolute;
       border: solid rgb(253, 253, 253);
       border-width: 0 3px 3px 0;
-      // display: in/line-block;
       padding: 3px;
       top: 1%;
       left: 3%;
@@ -200,10 +200,6 @@ flex-direction: column;
       transform: rotate(135deg);
       -webkit-transform: rotate(135deg);
     }
-    // p{
-    //   height: 20px;
-    //   width: 100%;
-    // }
     input{
       width: 90px;
       height: 20px;
@@ -276,7 +272,7 @@ flex-direction: column;
   display: none;
   padding-top: 15px;
   margin-top: 40px;
-  .categoriExpenses1{
+  .categoriExpenses{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
