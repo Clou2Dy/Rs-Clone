@@ -30,18 +30,13 @@ export  function addUnd() {
         }       
     })
     document.addEventListener('click',(el:any)=>{ 
-        let parent = document.getElementById('rashod').children 
-        if(el.target.classList.contains('backImg') === true || el.target.classList.contains('fon') === true){
-            // let back = el.target.classList
-            // for(let i = 0; i < parent.length; i++){
-            //     parent[i].classList.remove('backBlock')
-            // }
-            document.querySelector(el.target.children).classList.add('backBlock')
-            console.log(el.target.children);
-            
-        }else{
-            return console.log('None');
-            
-        }   
+       document.querySelectorAll('.backImg').forEach(element => {
+       element.classList.remove('backBlock')
+       })
+       if(el.target.classList.contains('backImg')){
+            el.target.classList.add('backBlock')
+       }else if(el.target.className === 'imgName' || 'imgBlock' === el.target.className){
+            el.target.parentElement.classList.add('backBlock')
+       }
     })
 }
