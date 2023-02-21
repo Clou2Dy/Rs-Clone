@@ -3,7 +3,7 @@ import {calculateTotalSum, calculateTotalProfit} from './functions'
 import {securitiesArray, updateSecuritiesArray} from './data'
 import {getStocksTickers} from './api'
 import {displayListSecurities} from './animationPage'
-import {renderSearchPage} from './searchPage'
+import {renderSearchPage, choiceOfSecurity} from './searchPage'
 
 export async function displaySecurityPage() {
     const securitiesPage = createElement('div', null, 'security-page');
@@ -98,7 +98,8 @@ async function renderAddButton(container: HTMLElement) {
     const arrayAvailableTickers = await getStocksTickers()
     inputElement.addEventListener('click', () => {
         securityPage.style.display = 'none';
-        renderSearchPage()
+        renderSearchPage();
+        choiceOfSecurity();
     });
     addButtonContainer.appendChild(inputElement);
 }
@@ -111,9 +112,3 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
     console.log(filteredTickers)
     return filteredTickers;
 }
-/*
-function addStocksBlock(container: HTMLElement) {
-    const stocksBlock = createElement('div', 'Stocks', 'stocks-block');
-    container.appendChild(stocksBlock);
-}
-*/

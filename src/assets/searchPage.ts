@@ -38,7 +38,6 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
               (elem[0] as string).toLowerCase().includes(searchTerm) ||
               (elem[19] as string).toLowerCase().includes(searchTerm));
     });
-    console.log(filteredTickers)
     return filteredTickers;
 }
 
@@ -82,5 +81,18 @@ function renderTickers(filteredStoks: Array<Array<string | number>>) {
                     stockQuotes.appendChild(stockPrevPrice);
                 }  
         });
+    }
+}
+
+export function choiceOfSecurity () {
+    const stockBlockContainer = document.querySelector('.search-page');
+    if (stockBlockContainer) {
+        stockBlockContainer.addEventListener ('click', function(event) {
+            const targetElement = event.target as HTMLElement;
+            if (targetElement.closest('.stock-element')) {
+                const selectedElement = targetElement.closest('.stock-element')?.children[0].children[0].children[1].innerHTML;
+                //renderOfSecurity (selectedElement);
+            }
+        })
     }
 }
