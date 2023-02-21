@@ -1,12 +1,12 @@
-import { butt, disabledButt, checkInp } from "./activeBtn"
+import { butt, moneyCount, checkInp } from "./activeBtn"
 let img:string 
 let text:string
 export  function addSpending (){
-    document.querySelector('.addExpenses')?.addEventListener('click', ()=>{
+    document.querySelector('.addExpenses')!.addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'block'
         document.querySelector<HTMLElement>('.zatemFon')!.style.display = 'block'
     })
-    document.querySelector('.left')?.addEventListener('click', ()=>{
+    document.querySelector('.left')!.addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'none'
         document.querySelector<HTMLElement>('.zatemFon')!.style.display = 'none'
     })
@@ -16,7 +16,7 @@ export  function addSpending (){
         
     })
     butt()
-    disabledButt()
+    moneyCount()
     checkInp()
 }
 export  function addUnd():any {
@@ -31,9 +31,12 @@ export  function addUnd():any {
     })
     document.addEventListener('click',(el:any) =>{ 
         if(el.target.classList.contains('backImg') || el.target.className === 'imgName' || 'imgBlock' === el.target.className){
-            // img = el.target.closest(".backImg").children[0].getAttribute('src')
+            img = el.target.closest(".backImg").children[0].getAttribute('src')
             // text = el.target.closest(".backImg").children[1].texContent
-            console.log(el.target.closest(".backImg").children[1]);
+            if(el.target.find('imgName')){
+
+                console.log('yes');
+            }
         }
         
         document.querySelectorAll('.backImg').forEach(element => {

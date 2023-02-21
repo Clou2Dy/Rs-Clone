@@ -1,8 +1,10 @@
 export default function progress(){
-    document.querySelector('.disa').addEventListener('click', function(){
-        document.querySelectorAll('.backImg').forEach((el:HTMLDListElement)=>{
+    // console.log(document.querySelector<any>('.disa').getAttribute('style'));
+    
+    document.querySelector('.disa').addEventListener('click', function(){       
+        document.querySelectorAll('.backImg').forEach((el:HTMLDListElement)=>{   
             if(el.classList.contains('backBlock')){
-                document.querySelector('.progress').insertAdjacentHTML('afterbegin', `<div class="${el.id}Progress" role="progressbar" style="width: 15%; background-color: ${el.classList[el.classList.length - 2]}; color: black" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">${el.id}</div>`)
+                document.querySelector('.progress').insertAdjacentHTML('afterbegin', `<div class="${el.id}Progress" role="progressbar" style="width: ${document.querySelector('.spentMoney').textContent == String(0) ? '100%' : Math.round((+document.querySelector<any>('.inpMoney').value / +document.querySelector('.spentMoney').textContent) * 100)+'%'}; background-color: ${el.classList[el.classList.length - 2]}; color: black" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">${el.id}</div>`)               
             }
         })
     })

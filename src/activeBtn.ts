@@ -10,7 +10,7 @@ export function butt(){
     
 }
 
-export function checkInp():void{
+export function checkInp(){
     document.querySelector<HTMLButtonElement>('.disa').disabled = true 
     document.querySelector('.inpMoney').addEventListener('input',function(){
         if(document.querySelector<HTMLInputElement>('.inpMoney').value.length === 0){
@@ -21,10 +21,10 @@ export function checkInp():void{
     })  
 }
 
-export function disabledButt (){
+export function moneyCount (){
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
-        let money:number = +document.querySelector('.money').textContent
+        let money:number = +document.querySelector('.spentMoney').textContent
         let val:number = +document.querySelector<HTMLInputElement>('.inpMoney').value
-        document.querySelector('.money').textContent = String(money+val)
+        document.querySelector('.spentMoney').textContent = String(money+val)
     })
 }
