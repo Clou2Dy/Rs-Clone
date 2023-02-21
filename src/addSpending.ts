@@ -8,14 +8,18 @@ export  function addSpending (){
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'none'
         document.querySelector<HTMLElement>('.zatemFon')!.style.display = 'none'
     })
-    document.querySelector('.disa')!.addEventListener('click', ()=>{
-        document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'none'
-        document.querySelector<HTMLElement>('.zatemFon')!.style.display = 'none'
-        
-    })
     butt()
     moneyCount()
     checkInp()
+    document.querySelector('.disa').addEventListener('click', ()=>{
+        document.querySelector<HTMLElement>('.changeMoney').style.display = 'none'
+        document.querySelector<HTMLElement>('.zatemFon').style.display = 'none'
+        document.querySelector<HTMLButtonElement>('.disa').disabled = true
+        document.querySelector<HTMLInputElement>('.inpMoney').value = ''
+        document.querySelectorAll('.backImg').forEach(element => {
+            element.classList.remove('backBlock')
+        })
+    })
 }
 
 
