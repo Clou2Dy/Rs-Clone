@@ -1,10 +1,10 @@
-import { butt, disabledButt, checkInp } from "./activeBtn"
+import { butt, moneyCount, checkInp } from "./activeBtn"
 export  function addSpending (){
-    document.querySelector('.addExpenses')?.addEventListener('click', ()=>{
+    document.querySelector('.addExpenses')!.addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'block'
         document.querySelector<HTMLElement>('.zatemFon')!.style.display = 'block'
     })
-    document.querySelector('.left')?.addEventListener('click', ()=>{
+    document.querySelector('.left')!.addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'none'
         document.querySelector<HTMLElement>('.zatemFon')!.style.display = 'none'
     })
@@ -14,7 +14,7 @@ export  function addSpending (){
         
     })
     butt()
-    disabledButt()
+    moneyCount()
     checkInp()
 }
 
@@ -30,10 +30,10 @@ export  function addUnd() {
         }       
     })
     document.addEventListener('click',(el:any)=>{ 
-       document.querySelectorAll('.backImg').forEach(element => {
-       element.classList.remove('backBlock')
-       })
        if(el.target.classList.contains('backImg')){
+            document.querySelectorAll('.backImg').forEach(element => {
+                element.classList.remove('backBlock')
+            })
             el.target.classList.add('backBlock')
        }else if(el.target.className === 'imgName' || 'imgBlock' === el.target.className){
             el.target.parentElement.classList.add('backBlock')

@@ -7,13 +7,14 @@ import progress from './progressbar';
 
 
 
-
+progress()
 data()
 block()
 addSpending()
 addUnd()
 income()
-progress()
+
+
 
 
 
