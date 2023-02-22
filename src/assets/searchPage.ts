@@ -15,7 +15,7 @@ export async function renderSearchPage(){
         pageContainer.appendChild(searchBlock);
         
         const arrayStocksTickers = await getStocksTickers();
-        const searchInput = document.querySelector('.security-page__container') as HTMLInputElement;
+        const searchInput = document.querySelector('.input-sec') as HTMLInputElement;
         if (searchInput) {
             searchInput.addEventListener('input', () => {
                 renderTickers(searchTickers(searchInput, arrayStocksTickers));
@@ -35,7 +35,7 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
 }
 
 function renderTickers(filteredStoks: Array<Array<string | number>>) {
-    const parentElement = document.querySelector('.securities-block');
+    const parentElement = document.querySelector('.search-block');
     if (parentElement) {
         while (parentElement?.firstChild) {
             parentElement.removeChild(parentElement.firstChild);
