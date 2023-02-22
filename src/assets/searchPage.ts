@@ -49,6 +49,7 @@ function renderTickers(filteredStoks: Array<Array<string | number>>) {
     
         filteredStoks.forEach((stock: Array<string | number>) => {
             const stockElement = createElement('div', null, 'stock-element');
+            stockElement.id = stock[0].toString();
             stocksBlocContainer.appendChild(stockElement);
             
             const stockRow = createElement('div', null, 'stock-row');
