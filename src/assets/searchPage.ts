@@ -20,7 +20,8 @@ export async function renderSearchPage(){
             searchInput.addEventListener('input', () => {
                 renderTickers(searchTickers(searchInput, arrayStocksTickers));
             });
-        } 
+        }
+        handleStockClick(); 
     }
 }
 
@@ -78,14 +79,14 @@ function renderTickers(filteredStoks: Array<Array<string | number>>) {
     }
 }
 
-export function choiceOfSecurity () {
-    const stockBlockContainer = document.querySelector('.search-page');
-    if (stockBlockContainer) {
-        stockBlockContainer.addEventListener ('click', function(event) {
-            const targetElement = event.target as HTMLElement;
-            if (targetElement.closest('.stock-element')) {
-                const selectedElement = targetElement.closest('.stock-element')?.children[0].children[0].children[1].innerHTML;
-                //renderOfSecurity (selectedElement);
+function handleStockClick() {    
+    const parentElement = document.querySelector('.search-block');
+    if (parentElement) {
+        parentElement.addEventListener('click', event => {
+            const stockElement = (event.target as HTMLElement).closest('.stock-element');
+            if (stockElement) {
+                const stockId = stockElement.id;
+                console.log(stockId);
             }
         })
     }

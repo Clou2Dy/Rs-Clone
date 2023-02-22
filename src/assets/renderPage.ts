@@ -3,7 +3,7 @@ import {calculateTotalSum, calculateTotalProfit} from './functions'
 import {securitiesArray, updateSecuritiesArray} from './data'
 import {getStocksTickers} from './api'
 import {displayListSecurities} from './animationPage'
-import {renderSearchPage, choiceOfSecurity} from './searchPage'
+import {renderSearchPage} from './searchPage'
 
 export async function displaySecurityPage() {
     const securitiesPage = createElement('div', null, 'security-page');
@@ -104,7 +104,7 @@ async function renderAddButton(container: HTMLElement) {
         inputElement.defaultValue = '';
         mainBlock.style.display = 'none';
         renderSearchPage();
-        choiceOfSecurity();
+        //choiceOfSecurity();
     });
     addButtonContainer.appendChild(inputElement);
 }
