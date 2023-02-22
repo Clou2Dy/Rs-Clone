@@ -249,5 +249,114 @@
     width: 100%;
     text-align: end;
     border-radius: 5px;
-    background-color: rgb(194, 65, 93);
+    background-color: rgb(199, 199, 199);
+}
+
+/**************************INFORMATION*******************************/
+.background-dimming {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.stock-information {
+    position: absolute;
+    top: 115px;
+    left: 0px;
+    width: calc(100vw - 40px);
+    height: 100%;
+    background-color:#ffffff;
+    border-radius: 10px;
+    padding: 0 20px 0 20px;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 0s linear 1s;
+}
+
+.stock-information.show {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.type-information {
+    width: 100%;
+    text-align: center;
+    margin: 25px 0 25px 0;
+}
+
+.close-button {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+  
+.close-button::before,
+.close-button::after {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 20px;
+    background-color: #007ac1;
+}
+  
+.close-button::before {
+    transform: rotate(45deg);
+}
+  
+.close-button::after {
+    transform: rotate(-45deg);
+}
+
+.hr-line {
+    width: 100%;
+    height: 1px;
+    background-color: #adbace;
+    border: none;
+}
+
+.ticker-information {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #007ac1;
+    color: #FFFFFF;
+}
+
+.row-name-ticker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0 20px 0;
+}
+
+.price-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.price-text {
+    font-size: 16px;
+    color: #667e9c;
+}
+
+.price-value {
+    font-size: 32px;
+    color: #09121f
 }
