@@ -99,11 +99,10 @@ async function renderAddButton(container: HTMLElement) {
     const inputElement = createElement('input', null, 'input-sec') as HTMLInputElement;
     inputElement.defaultValue = 'Компания, тикер, ISIN';
     inputElement.setAttribute('type', 'text');
-    const securityPage = document.querySelector('.security-page') as HTMLElement;
-    const searchPage = document.querySelector('.search-page') as HTMLElement;
-    const arrayAvailableTickers = await getStocksTickers()
+    const mainBlock = document.querySelector('.main-block') as HTMLElement;
     inputElement.addEventListener('click', () => {
-        securityPage.style.display = 'none';
+        inputElement.defaultValue = '';
+        mainBlock.style.display = 'none';
         renderSearchPage();
         choiceOfSecurity();
     });

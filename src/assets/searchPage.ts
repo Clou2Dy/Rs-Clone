@@ -2,33 +2,26 @@ import {createElement} from './functions'
 import {getStocksTickers} from './api'
 
 export async function renderSearchPage(){
-    const searchPage = createElement('div', null, 'search-page');
-    document.body.appendChild(searchPage);
-    const searchPageContainer = createElement('div', null, 'search-page__container');
-    searchPage.appendChild(searchPageContainer);
+    const pageContainer = document.querySelector('.security-page__container');
     const searchBlock = createElement('div', null, 'search-block');
-    searchPageContainer.appendChild(searchBlock);
-    const securitiesBlock = createElement('div', null, 'securities-block');
-    searchPageContainer.appendChild(securitiesBlock);
-    const searchInput = createElement('input', null, 'search-input') as HTMLInputElement;
-    searchBlock.appendChild(searchInput);
-    searchInput.defaultValue = 'Компания, тикер, ISIN';
-    const cancelInput = createElement('div', 'Отменить', 'search-cancel');
-    searchBlock.appendChild(cancelInput);
-
-    const securityPage = document.querySelector('.security-page') as HTMLElement
-    cancelInput.addEventListener('click', () => {
-        searchPage.style.display = 'none';
-        securityPage.style.display = 'block';
-    });
-
-    const arrayStocksTickers = await getStocksTickers()
-    searchInput.addEventListener('click', () => {
-        searchInput.value = ''
-    })
-    searchInput.addEventListener('input', () => {
-        renderTickers(searchTickers(searchInput, arrayStocksTickers));
-    });
+    if (pageContainer) {
+        const existingSearchBlock = pageContainer.querySelector('.search-block');
+        if (existingSearchBlock) {
+            while (existingSearchBlock.firstChild) {
+                existingSearchBlock.removeChild(existingSearchBlock.firstChild);
+            }
+            pageContainer.removeChild(existingSearchBlock);
+        }
+        pageContainer.appendChild(searchBlock);
+        
+        const arrayStocksTickers = await getStocksTickers();
+        const searchInput = document.querySelector('.security-page__container') as HTMLInputElement;
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                renderTickers(searchTickers(searchInput, arrayStocksTickers));
+            });
+        } 
+    }
 }
 
 function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string | number>>) {
