@@ -1,5 +1,5 @@
 export default function progress(){
-    console.log(document.querySelector<any>('.disa').getAttribute('style'));
+    // console.log(document.querySelector<any>('.disa').getAttribute('style'));
     
     document.querySelector('.disa').addEventListener('click', function(){       
         document.querySelectorAll('.backImg').forEach((el:HTMLDListElement)=>{   

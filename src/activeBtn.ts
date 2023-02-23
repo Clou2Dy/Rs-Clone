@@ -1,12 +1,12 @@
 export function butt(){
-    document.addEventListener('click', function(el:any){
-        let day =  document.querySelector('.expensesDay')
-        let tom = document.querySelector('.expensesTom')
-        let last = document.querySelector('.expensesLast')
-        document.querySelector('.expensesDay')!.addEventListener('click', ()=>{
-            document.querySelector<HTMLElement>('.expensesDay')!.classList.toggle('back')
-        })
-    })
+    // document.addEventListener('click', function(el:any){
+    //     let day =  document.querySelector('.expensesDay')
+    //     let tom = document.querySelector('.expensesTom')
+    //     let last = document.querySelector('.expensesLast')
+    //     document.querySelector('.expensesDay')!.addEventListener('click', ()=>{
+    //         document.querySelector<HTMLElement>('.expensesDay')!.classList.toggle('back')
+    //     })
+    // })
     
 }
 
