@@ -13,11 +13,11 @@ export function butt(){
 export function checkInp(){
     document.querySelector<HTMLButtonElement>('.disa').disabled = true 
     document.querySelector('.inpMoney').addEventListener('input',function(){
-        if(document.querySelector<HTMLInputElement>('.inpMoney').value.length === 0){
+        if(!Array.from(document.querySelectorAll('.backImg')).some((el)=> el.classList.contains('backBlock')) || document.querySelector<HTMLInputElement>('.inpMoney').value.length === 0){
             document.querySelector<HTMLButtonElement>('.disa').disabled = true 
         }else{
             document.querySelector<HTMLButtonElement>('.disa').disabled = false
-        }
+        } 
     })  
 }
 
