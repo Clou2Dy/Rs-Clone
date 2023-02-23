@@ -1,6 +1,7 @@
 import {createElement} from './functions';
 import {calculateTotalSum, calculateTotalProfit} from './functions'
-import {securitiesArray, updateSecuritiesArray} from './data'
+import {updateSecuritiesArray} from './data'
+import {securitiesArray} from '../app'
 import {getStocksTickers} from './api'
 import {displayListSecurities} from './animationPage'
 import {renderSearchPage} from './searchPage'
