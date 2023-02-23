@@ -156,8 +156,15 @@ flex-direction: column;
     height: 50px;
     background-color: rgb(46, 51, 49);
     border-radius: 10px;
-    .imgDiv{
+    .blockContent{
+      display: flex;
+      .imgDiv{
         width: 5%;
+        margin: 0px;
+      }
+      .rasxoMoney{
+        @include white
+      }
     }
   }
   

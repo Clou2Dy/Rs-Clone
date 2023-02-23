@@ -1,6 +1,6 @@
 import { butt, moneyCount, checkInp } from "./activeBtn"
 let img:string 
-let text:string
+let text:any
 export  function addSpending (){
     document.querySelector('.addExpenses').addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney').style.display = 'block'
@@ -36,11 +36,12 @@ export  function addUnd():any {
     document.addEventListener('click',(el:any) =>{ 
         if(el.target.classList.contains('backImg') || el.target.className === 'imgName' || 'imgBlock' === el.target.className){
             img = el.target.closest(".backImg").children[0].getAttribute('src')
-            // text = el.target.closest(".backImg").children[1].texContent
-            // if(el.target.find('imgName')){
-            //     console.log('yes');
-            // }
+            text = el.target.closest(".backImg").children.id
+            // text = el.target.texContent
+            console.log(text);
+            // console.log(el.target);
         }
+        // text = el.target.closest(".backImg").children[1];
         
         if(el.target.classList.contains('backImg')){
             document.querySelectorAll('.backImg').forEach(element => {
@@ -60,7 +61,7 @@ export function block(){
     let i = 0
     document.querySelector('.disa').addEventListener('click', ()=>{
         i++
-        const blockSpending = `<div class='blockContent'> <div class='imgDiv'><img src = ${img}></div></div> <div class='nameSpanding'></div> <div class='procent'></div> <div class='rasxoMoney'></div> </div>`
+        const blockSpending = `<div class='blockContent'> <div class='imgDiv'><img src = ${img}></div> <div class='nameSpanding'>${text.value}</div> <div class='procent'></div> <div class='rasxoMoney'>${document.querySelector<HTMLInputElement>('.inpMoney').value}</div> </div>`
         let block = document.createElement('div')
         block.classList.add(`block${i}`, `block`)
         block.innerHTML = blockSpending
