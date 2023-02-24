@@ -18,7 +18,8 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
     row.appendChild(nameBlock);
     priceBlock.appendChild(priceText);
     priceBlock.appendChild(priceValue);
-  
+
+    const backgroundDimming = createElement('div', null, 'background-dimming');
     const stockInfoBlock = createElement('div', null, 'stock-information');
     stockInfoBlock.appendChild(typeBlock);
     stockInfoBlock.appendChild(closeButton);
@@ -26,6 +27,13 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
     stockInfoBlock.appendChild(row);
     stockInfoBlock.appendChild(priceBlock);
     stockInfoBlock.appendChild(hrElement2);
+
+    const securityPage = document.querySelector('.security-page')
+    securityPage?.appendChild(backgroundDimming);
+    closeButton.addEventListener('click', () => {
+        securityPage?.removeChild(stockInfoBlock);
+        securityPage?.removeChild(backgroundDimming);
+    });
   
     return stockInfoBlock;
   }
@@ -34,10 +42,10 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
     const inputContainer = createElement('div', null, 'input-container');
     const purchasePriceInput = createElement('input', null, 'purchase-price-input') as HTMLInputElement;
     purchasePriceInput.type = 'number';
-    purchasePriceInput.placeholder = 'Purchase Price';
+    purchasePriceInput.placeholder = 'Цена покупки';
     const quantityInput = createElement('input', null, 'quantity-input') as HTMLInputElement;
     quantityInput.type = 'number';
-    quantityInput.placeholder = 'Quantity';
+    quantityInput.placeholder = 'Количество';
     const dateInput = createElement('input', null, 'date-input') as HTMLInputElement;
     dateInput.type = 'date';
     dateInput.value = new Date().toISOString().split('T')[0];
@@ -51,12 +59,11 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
   
   export function createStockBlock(name: string | null, ticker: string | null, last: string | null) {
     const securityPage = document.querySelector('.security-page')
-    const backgroundDimming = createElement('div', null, 'background-dimming');
   
     const stockInfoBlock = createStockInfoBlock(name, ticker, last);
     const inputContainer = createInputContainer();
   
-    const addToPortfolioButton = createElement('button', 'Add to Portfolio', 'add-to-portfolio-button');
+    const addToPortfolioButton = createElement('button', 'Добавить в портфель', 'add-to-portfolio-button');
     addToPortfolioButton.id = 'add-stock-button';
     addToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
@@ -72,22 +79,18 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
         purchaseDate: new Date(dateInput.value),
       };
     
-      securitiesArray.push(newSecurity);
-      console.log (securitiesArray)
+      addSecurityToPortfolio(newSecurity);
     });
   
     stockInfoBlock.appendChild(inputContainer);
     stockInfoBlock.appendChild(addToPortfolioButton);
     securityPage?.appendChild(stockInfoBlock);
-    securityPage?.appendChild(backgroundDimming);
+
   
     stockInfoBlock.classList.add('show'); /* add the 'show' class */
-  }
-  
+}
 
-
-  
-  
-  
-  
-  
+function addSecurityToPortfolio(security: Security) {
+    securitiesArray.push(security);
+    localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
+}

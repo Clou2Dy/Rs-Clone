@@ -93,7 +93,6 @@ async function renderSecurityBlock(name: string, type: string, container: HTMLEl
     lastPriceArray.forEach(el => displayListSecurities(el, list))
 }
 
-
 async function renderAddButton(container: HTMLElement) {
     const addButtonContainer = createElement('div', null, 'add-button__container');
     container.appendChild(addButtonContainer);

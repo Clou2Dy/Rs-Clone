@@ -360,3 +360,10 @@
     font-size: 32px;
     color: #09121f
 }
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
