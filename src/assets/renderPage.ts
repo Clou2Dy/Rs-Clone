@@ -104,16 +104,6 @@ async function renderAddButton(container: HTMLElement) {
         inputElement.defaultValue = '';
         mainBlock.style.display = 'none';
         renderSearchPage();
-        //choiceOfSecurity();
     });
     addButtonContainer.appendChild(inputElement);
-}
-
-function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string | number>>) {
-    const searchTerm = inputElement.value.toLowerCase();
-    const filteredTickers = array.filter((elem: Array<string | number>) => {
-      return (elem[2] as string).toLowerCase().includes(searchTerm);
-    });
-    console.log(filteredTickers)
-    return filteredTickers;
 }

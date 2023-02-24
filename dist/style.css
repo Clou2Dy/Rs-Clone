@@ -243,13 +243,13 @@
     width: 100%;
     text-align: end;
     border-radius: 5px;
-    background-color: aquamarine;
+    background-color: #00be94;
 }
 .stock-prev_red {
     width: 100%;
     text-align: end;
     border-radius: 5px;
-    background-color: rgb(199, 199, 199);
+    background-color: #ed4359;
 }
 
 /**************************INFORMATION*******************************/

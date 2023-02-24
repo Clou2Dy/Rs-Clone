@@ -1,6 +1,7 @@
 import {createElement} from './functions'
 import {getStocksTickers} from './api'
-import {createStockBlock} from './addPage'
+import {createStockBlock, updateStockBlock} from './addPage'
+import {securitiesArray} from '../app'
 
 export async function renderSearchPage(){
     const pageContainer = document.querySelector('.security-page__container');
@@ -48,7 +49,6 @@ function renderTickers(filteredStoks: Array<Array<string | number>>) {
         parentElement.appendChild(stocksBlock);
         const stocksBlocContainer = createElement ('div', null, 'stocks-block__container')
         stocksBlock.appendChild(stocksBlocContainer);       
-        console.dir(filteredStoks);
         filteredStoks.forEach((stock: Array<string | number>) => {
             const stockElement = createElement('div', null, 'stock-element');
             stockElement.id = stock[0].toString();
@@ -89,7 +89,17 @@ function handleStockClick() {
                 const stockTicker = stockElement.id;
                 const stockName = stockElement.querySelector('.stock-name')!.textContent;
                 const stockLast = stockElement.querySelector('.stock-last')!.textContent;
-                createStockBlock(stockName, stockTicker, stockLast);
+
+                const securityExists = securitiesArray.some(security => security.ticker === stockTicker);
+
+                if (securityExists) {
+                    const security = securitiesArray.find(security => security.ticker === stockTicker);
+                    if (security) {
+                        updateStockBlock(security);
+                    }
+                } else {
+                    createStockBlock(stockName, stockTicker, stockLast);
+                }
             }
         })
     }
