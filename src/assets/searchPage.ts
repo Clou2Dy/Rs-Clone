@@ -1,6 +1,7 @@
 import {createElement} from './functions'
 import {getStocksTickers} from './api'
-import {createStockBlock, updateStockBlock} from './addPage'
+import {createStockBlock} from './addPage'
+import {updateStockBlock} from './updatePage'
 import {securitiesArray} from '../app'
 
 export async function renderSearchPage(){
@@ -66,9 +67,9 @@ function renderTickers(filteredStoks: Array<Array<string | number>>) {
                 
             const stockQuotes = createElement('div', null, 'stock-quotes');
             stockRow.appendChild(stockQuotes);
-                const stockLastPrice = createElement('div', `${stock[15]} ₽`, 'stock-last');
+                const stockLastPrice = createElement('div', `${stock[3]} ₽`, 'stock-last');
                 stockQuotes.appendChild(stockLastPrice);
-                const procent = (100 * (+stock[3] - +stock[15]) / (+stock[15])).toFixed(2);
+                const procent = (100 * (+stock[3] - +stock[15]) / (+stock[3])).toFixed(2);
                 if (+procent > 0) {
                     const stockPrevPrice = createElement('div', `${procent} %`, 'stock-prev_green');
                     stockQuotes.appendChild(stockPrevPrice);
@@ -91,11 +92,10 @@ function handleStockClick() {
                 const stockLast = stockElement.querySelector('.stock-last')!.textContent;
 
                 const securityExists = securitiesArray.some(security => security.ticker === stockTicker);
-
                 if (securityExists) {
                     const security = securitiesArray.find(security => security.ticker === stockTicker);
                     if (security) {
-                        updateStockBlock(security);
+                        updateStockBlock(security, stockLast);
                     }
                 } else {
                     createStockBlock(stockName, stockTicker, stockLast);

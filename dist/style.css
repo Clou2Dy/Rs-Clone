@@ -367,3 +367,8 @@
     gap: 10px;
     margin-bottom: 10px;
 }
+
+.portfolio-percentage {
+    font-size: 16px;
+    color: #667e9c;
+}

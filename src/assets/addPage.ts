@@ -38,7 +38,7 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
     return stockInfoBlock;
   }
   
-  function createInputContainer(): HTMLElement {
+export function createInputContainer(): HTMLElement {
     const inputContainer = createElement('div', null, 'input-container');
     const purchasePriceInput = createElement('input', null, 'purchase-price-input') as HTMLInputElement;
     purchasePriceInput.type = 'number';
@@ -91,64 +91,4 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
 function addSecurityToPortfolio(security: Security) {
     securitiesArray.push(security);
     localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
-}
-
-export function updateStockBlock(security: Security) {
-    console.log (`Update ${security.ticker}`)
-    const securityPage = document.querySelector('.security-page');
-    const stockInfoBlock = updateStockInfoBlock(security.name, security.ticker);
-    const inputContainer = createInputContainer();
-    const addToPortfolioButton = createElement('button', 'Добавить в портфель', 'add-to-portfolio-button');
-
-    stockInfoBlock.appendChild(inputContainer);
-    stockInfoBlock.appendChild(addToPortfolioButton);
-    securityPage?.appendChild(stockInfoBlock);
-    stockInfoBlock.classList.add('show'); /* add the 'show' class */
-};
-
-function updateStockInfoBlock(name: string | null, ticker: string){
-    const typeBlock = createElement('div', `Акция`, 'type-information');
-    const closeButton = createElement('div', null, 'close-button');
-    const hrElement = createElement('hr', null, 'hr-line');
-    const row = createElement('div', null, 'row-name-ticker');
-    const tickerBlock = createElement('div', `${ticker || ''}`, 'ticker-information');
-    const nameBlock = createElement('div', `${name || ''}`, 'name-information');
-    const priceBlock = createElement('div', null, 'price-information');
-    const priceText = createElement('div', 'Стоимость ценных бумаг', 'price-text');
-
-    const priceValue = createElement('div', `${calculateTotalPurchasePrice(securitiesArray, ticker) || ''}`, 'price-value');
-    const hrElement2 = createElement('hr', null, 'hr-line');
-  
-    row.appendChild(tickerBlock);
-    row.appendChild(nameBlock);
-    priceBlock.appendChild(priceText);
-    priceBlock.appendChild(priceValue);
-
-    const backgroundDimming = createElement('div', null, 'background-dimming');
-    const stockInfoBlock = createElement('div', null, 'stock-information');
-    stockInfoBlock.appendChild(typeBlock);
-    stockInfoBlock.appendChild(closeButton);
-    stockInfoBlock.appendChild(hrElement);
-    stockInfoBlock.appendChild(row);
-    stockInfoBlock.appendChild(priceBlock);
-    stockInfoBlock.appendChild(hrElement2);
-
-    const securityPage = document.querySelector('.security-page')
-    securityPage?.appendChild(backgroundDimming);
-    closeButton.addEventListener('click', () => {
-        securityPage?.removeChild(stockInfoBlock);
-        securityPage?.removeChild(backgroundDimming);
-    });
-  
-    return stockInfoBlock;
-}
-
-function calculateTotalPurchasePrice(securities: Security[], ticker: string): number {
-    return securities.reduce((total: number, security: Security) => {
-      if (security.ticker === ticker) {
-        return total + (security.purchasePrice * security.amount);
-      } else {
-        return total;
-      }
-    }, 0);
 }
