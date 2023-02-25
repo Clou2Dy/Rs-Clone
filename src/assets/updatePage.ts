@@ -30,7 +30,9 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     const priceValue = createElement('div', `${purchasePrice || ''} ₽`, 'price-value');
     const portfolioPercentage = createElement('div', `${percentage} % от портфеля`, 'portfolio-percentage');
     const financialResultsText = createElement('div', `Финансовый результат за все время`, 'financial-result-text');
-    const financialResults = createElement('div', `${calculateFinancialResult}`, 'financial-result');
+    const finResult = calculateFinancialResult(securitiesArray, ticker, lastPrice);
+    console.log(finResult);
+    const financialResults = createElement('div', `${finResult}`, 'financial-result');
     const hrElement2 = createElement('hr', null, 'hr-line');
   
     row.appendChild(tickerBlock);
@@ -39,6 +41,7 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     priceBlock.appendChild(priceValue);
     priceBlock.appendChild(portfolioPercentage);
     priceBlock.appendChild(financialResultsText);
+    priceBlock.appendChild(financialResults);
 
     const backgroundDimming = createElement('div', null, 'background-dimming');
     const stockInfoBlock = createElement('div', null, 'stock-information');
@@ -70,6 +73,12 @@ function calculateTotalPurchasePrice(securities: Security[], ticker: string, las
     }, 0);
 }
 
-function calculateFinancialResult () {
-  
+function calculateFinancialResult(securities: Security[], ticker: string, lastPrice: string | null | undefined): number {
+  console.log (securities);
+  const matchingSecurities = securities.filter(security => security.ticker === ticker);
+  const numLastPrice = parseFloat(lastPrice ?? '0');
+  const result = matchingSecurities.reduce((result, security) => {
+    return result + (numLastPrice - security.purchasePrice) * security.amount;
+  }, 0);
+  return parseFloat(result.toFixed(2));
 }
