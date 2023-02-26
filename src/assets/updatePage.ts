@@ -6,7 +6,7 @@ import {totalPortfolioValue} from './renderPage'
 
 export function updateStockBlock(security: Security, lastPrice: string | null) {
     const securityPage = document.querySelector('.security-page');
-    const stockInfoBlock = updateStockInfoBlock(security.name, security.ticker, lastPrice);
+    const stockInfoBlock = updateStockInfoBlock(security.name, security.ticker, lastPrice, security.amount);
     const inputContainer = createInputContainer();
     const addToPortfolioButton = createElement('button', 'Добавить в портфель', 'add-to-portfolio-button');
 
@@ -16,7 +16,7 @@ export function updateStockBlock(security: Security, lastPrice: string | null) {
     stockInfoBlock.classList.add('show'); /* add the 'show' class */
 }
 
-function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: string | null){
+function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: string | null, amount: number){
     const typeBlock = createElement('div', `Акция`, 'type-information');
     const closeButton = createElement('div', null, 'close-button');
     const hrElement = createElement('hr', null, 'hr-line');
@@ -29,10 +29,16 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     const percentage = (100*(purchasePrice / totalPortfolioValue)).toFixed(2);
     const priceValue = createElement('div', `${purchasePrice || ''} ₽`, 'price-value');
     const portfolioPercentage = createElement('div', `${percentage} % от портфеля`, 'portfolio-percentage');
-    const financialResultsText = createElement('div', `Финансовый результат за все время`, 'financial-result-text');
+    const financialResultsText = createElement('div', `Фин. результат за все время`, 'financial-result-text');
     const finResult = calculateFinancialResult(securitiesArray, ticker, lastPrice);
-    console.log(finResult);
-    const financialResults = createElement('div', `${finResult}`, 'financial-result');
+    const financialResults = createElement('div', `${finResult} ₽`, 'financial-result');
+    const amountText = createElement('div', `Количество ценных бумаг`, 'financial-result-text');
+    const amountSecurity = createElement('div', `${amount} шт.`, 'financial-result');
+    if (finResult > 0) {
+      financialResults.classList.add('green');
+    } else if (finResult < 0) {
+      financialResults.classList.add('red');
+    }
     const hrElement2 = createElement('hr', null, 'hr-line');
   
     row.appendChild(tickerBlock);
@@ -42,6 +48,8 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     priceBlock.appendChild(portfolioPercentage);
     priceBlock.appendChild(financialResultsText);
     priceBlock.appendChild(financialResults);
+    priceBlock.appendChild(amountText);
+    priceBlock.appendChild(amountSecurity);
 
     const backgroundDimming = createElement('div', null, 'background-dimming');
     const stockInfoBlock = createElement('div', null, 'stock-information');

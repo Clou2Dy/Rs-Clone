@@ -371,4 +371,65 @@
 .portfolio-percentage {
     font-size: 16px;
     color: #667e9c;
+    margin-bottom: 20px;
+}
+
+.financial-result-text{
+    font-size: 16px;
+    color: #667e9c;
+}
+
+.green {
+    color: #00be94;
+    margin-bottom: 20px;
+}
+
+.green:before {
+    content: '';
+    display: inline-block;
+    margin-right: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 7.5px 5px;
+    border-color: transparent transparent #00be94 transparent;
+    
+}
+
+.red::after,
+.green::after {
+    content: ".";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    border-radius: 50%;
+    background-color: inherit;
+    color: inherit;
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+    position: absolute;
+    margin-top: -4px; /* half the height */
+}
+
+.red {
+    color: #d53c4f;
+    margin-bottom: 10px;
+}
+
+.red:before {
+    content: '';
+    display: inline-block;
+    margin-right: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7.5px 5px 0 5px;
+    border-color: #d53c4f transparent transparent transparent;
+    
+}
+
+.red::after {
+    content: ".";
 }
