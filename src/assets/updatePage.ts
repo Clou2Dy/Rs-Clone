@@ -112,6 +112,25 @@ function calculateFinancialResult(securities: Security[], ticker: string, lastPr
   return parseFloat(result.toFixed(2));
 }
 
+function createUpdateContainer(): HTMLElement {
+  const inputContainer = createElement('div', null, 'input-container');
+  const purchasePriceInput = createElement('input', null, 'purchase-price-input') as HTMLInputElement;
+  purchasePriceInput.type = 'number';
+  purchasePriceInput.placeholder = 'Цена';
+  const quantityInput = createElement('input', null, 'quantity-input') as HTMLInputElement;
+  quantityInput.type = 'number';
+  quantityInput.placeholder = 'Количество';
+  const dateInput = createElement('input', null, 'date-input') as HTMLInputElement;
+  dateInput.type = 'date';
+  dateInput.value = new Date().toISOString().split('T')[0];
+
+  inputContainer.appendChild(purchasePriceInput);
+  inputContainer.appendChild(quantityInput);
+  inputContainer.appendChild(dateInput);
+
+  return inputContainer;
+}
+
 export function removeSecurityFromPortfolio(ticker: string, sellPrice: number, numToSell: number): void {
   const matchingSecurities = securitiesArray.filter(security => security.ticker === ticker);
   matchingSecurities.sort((a, b) => a.purchaseDate!.getTime() - b.purchaseDate!.getTime());
