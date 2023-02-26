@@ -18,10 +18,10 @@
                   <h3 class="money"></h3>
                   <div class="row rowExpens">
                     <div class="col-8 col-sm-6">
-                      <h4 class="underline">РАСХОДЫ</h4>
+                      <h4 class="underline categoryExpenses">РАСХОДЫ</h4>
                     </div>
                     <div class="col-4 col-sm-6">
-                      <h4 class="underline">ДОХОДЫ</h4>
+                      <h4 class="underline categoryIncome">ДОХОДЫ</h4>
                     </div>
                   </div>
                 </div>
@@ -42,9 +42,6 @@
                     <div class="interval"></div>
                 </div>
                 <div class="expenses">
-                    <!-- <div class="spet">
-                        <div class="spentMoney"></div>
-                    </div> -->
                     <div class="progress"></div>                  
                     <div class="spentMoney">0</div>
                     <div class="addExpenses"></div>
@@ -52,13 +49,13 @@
                 </div>
             </div>
         </div>
-        <div class="spending"></div>
+        <div class="container-fluid spending"></div>
+        <div class="container-fluid income" style="display: none;"></div>
         <div class="container-fluid changeMoney">
             <div class="row headMenu">
                 <i class=" row arrow left"></i>
-                <div class="col-sm-6 underline paragraphExpenses">РАСХОДЫ</div>
+                <div class="col-sm-6 underline paragraphExpenses paragraphExpensesActive">РАСХОДЫ</div>
                 <div class="col-sm-6 underline paragraphIncome">ДОХОДЫ</div>
-                <!-- <button type="button" class="btn btn-success"></button> -->
                 <input type="number" class="inpMoney">
             </div>
                 <div class="container-fluid rashod">
@@ -78,7 +75,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3 col-sm-6 col-12 family backImg pink" id="family">
                         <img class="imgBlock" src="assets/family-50.png" alt="family">
-                        <p class="imgName" id="7">Семья</p>
+                        <p class="imgName">Семья</p>
                     </div>
                         <div class="col-md-6 col-lg-3 col-sm-6 col-12 gift backImg blue" id="gift">
                             <img class="imgBlock" src="assets/gift-50.png" alt="gift">

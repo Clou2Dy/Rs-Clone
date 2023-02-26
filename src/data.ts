@@ -4,6 +4,7 @@ export default function data(){
     let year:any = {year: 'numeric'}
     let day = new Date()
     let form1 = ('MMMM.YYYY')
+    document.querySelector('.interval')!.textContent = 'Today, ' + moment().year()
     document.querySelector('#month')!.addEventListener('click', ()=>{
         document.querySelector('.interval')!.textContent = moment().month('string').format(form1)
     })

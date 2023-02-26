@@ -4,6 +4,11 @@ html{
 @mixin white {
   color: white;
 }
+@mixin expensTextDecorating {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
 .back{
   background-color:#3d6b56 ;
 }
@@ -49,7 +54,6 @@ body{
   transition: transform 0.25s;
   transform-origin: right;
 }
-// @media (min-width: 390px){
   .bigCont{
     text-align: center;
     padding: 0px;
@@ -67,7 +71,6 @@ body{
       }
       h2{
         margin: 0px;
-        // margin-top: 10px;
       }
       h3{
         margin: 0px;
@@ -86,14 +89,11 @@ body{
       }
     }
   }
-// }
 
 .blockInfo{
   display: flex;
   justify-content: center;
   @include white;
-  
-  // height: auto;
   .info{
     width: 90%;
     background-color: rgb(46, 51, 49);
@@ -141,13 +141,13 @@ body{
         linear-gradient(rgb(0, 0, 0),rgb(0, 0, 0)),
         yellow;
       background-position:center;
-      background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
+      background-size: 50% 2px,2px 50%;
       background-repeat:no-repeat;
       
     }
   }
 }
-.spending{
+.spending, .income{
 display: flex;
 flex-direction: column;
 .block{
@@ -158,17 +158,44 @@ flex-direction: column;
     border-radius: 10px;
     .blockContent{
       display: flex;
+      padding: 0px 10px 0px 10px;
       .imgDiv{
         width: 5%;
         margin: 0px;
+        padding: 0px;
       }
-      .rasxoMoney{
-        @include white
+      .rasxoMoney, .nameSpending, .expensesDateBlock, .procent{
+        @include expensTextDecorating;
+        @include white;
+        padding: 0px;
+      }
+      .dropdown{
+        margin-top: 5px;
+      }
+      .delete{
+        width: 24px;
+        margin-top: 10px;
+        background-image: url("./assets/delete24.png");
+        background-repeat: no-repeat;
+      }
+      @media (max-width:1124px){
+        .rasxoMoney, .nameSpending, .expensesDateBlock, .procent{
+          font-size: 15px;
+          padding: 0px;
+        }
+      }
+      @media (max-width:720px){
+        .rasxoMoney, .nameSpending, .expensesDateBlock, .procent{
+          font-size: 12px;
+          padding: 0px;
+        }
       }
     }
   }
   
 }
+
+
 
 
 .changeMoney{
@@ -226,7 +253,7 @@ flex-direction: column;
           .imgName{
             width: 50px;
           }
-    }
+        }
   }
   .rowDate{
     margin-top: 30px;
@@ -265,7 +292,6 @@ flex-direction: column;
     flex-wrap: wrap;
     .imgName{
       width: 50px;
-      // margin-top: 40px;
     }
 }
 }
