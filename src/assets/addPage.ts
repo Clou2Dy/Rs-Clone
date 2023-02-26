@@ -63,7 +63,7 @@ export function createInputContainer(): HTMLElement {
     const stockInfoBlock = createStockInfoBlock(name, ticker, last);
     const inputContainer = createInputContainer();
   
-    const addToPortfolioButton = createElement('button', 'Добавить в портфель', 'add-to-portfolio-button');
+    const addToPortfolioButton = createElement('button', 'Покупка', 'add-to-portfolio-button');
     addToPortfolioButton.id = 'add-stock-button';
     addToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
@@ -88,7 +88,7 @@ export function createInputContainer(): HTMLElement {
     stockInfoBlock.classList.add('show'); /* add the 'show' class */
 }
 
-function addSecurityToPortfolio(security: Security) {
+export function addSecurityToPortfolio(security: Security) {
     securitiesArray.push(security);
     localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
 }
