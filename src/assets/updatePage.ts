@@ -112,73 +112,30 @@ function calculateFinancialResult(securities: Security[], ticker: string, lastPr
   return parseFloat(result.toFixed(2));
 }
 
-function createUpdateContainer(): HTMLElement {
-  const inputContainer = createElement('div', null, 'input-container');
-  const purchasePriceInput = createElement('input', null, 'purchase-price-input') as HTMLInputElement;
-  purchasePriceInput.type = 'number';
-  purchasePriceInput.placeholder = 'Цена';
-  const quantityInput = createElement('input', null, 'quantity-input') as HTMLInputElement;
-  quantityInput.type = 'number';
-  quantityInput.placeholder = 'Количество';
-  const dateInput = createElement('input', null, 'date-input') as HTMLInputElement;
-  dateInput.type = 'date';
-  dateInput.value = new Date().toISOString().split('T')[0];
-
-  inputContainer.appendChild(purchasePriceInput);
-  inputContainer.appendChild(quantityInput);
-  inputContainer.appendChild(dateInput);
-
-  return inputContainer;
-}
-
-export function removeSecurityFromPortfolio(ticker: string, amount: number): void {
-  const securitiesToSell: Security[] = [];
-  let remainingAmountToSell = amount;
-
-  // First, find all securities with the given ticker
+export function removeSecurityFromPortfolio(ticker: string, sellPrice: number, numToSell: number): void {
   const matchingSecurities = securitiesArray.filter(security => security.ticker === ticker);
-
-  // Sort the securities by purchase date (oldest first)
-  matchingSecurities.sort((a, b) => a.purchaseDate?.getTime()! - b.purchaseDate?.getTime()!);
-
-  // Sell the securities with the lowest purchase date first, until the required amount is sold
+  matchingSecurities.sort((a, b) => a.purchaseDate!.getTime() - b.purchaseDate!.getTime());
+  let numSold = 0;
   for (const security of matchingSecurities) {
-    if (security.amount <= remainingAmountToSell) {
-      securitiesToSell.push(security);
-      remainingAmountToSell -= security.amount;
-    } else {
-      // Sell the remaining amount from this security, and exit the loop
-      const remainingSecurity = { ...security, amount: remainingAmountToSell };
-      securitiesToSell.push(remainingSecurity);
-      remainingAmountToSell = 0;
+    const numAvailable = security.amount - numSold;
+    if (numAvailable <= 0) {
+      continue;
+    }
+    const sellAmount = Math.min(numAvailable, numToSell);
+    const profitLoss = sellAmount * (sellPrice - security.purchasePrice);
+    security.amount -= sellAmount;
+    numSold += sellAmount;
+    console.log(`Sold ${sellAmount} ${ticker} securities for a profit/loss of ${profitLoss} ₽`);
+    if (numSold >= numToSell) {
       break;
     }
   }
-
-  // If there is still amount to sell, look for securities with a later purchase date
-  if (remainingAmountToSell > 0) {
-    const remainingSecurities = matchingSecurities.slice(securitiesToSell.length);
-    for (const security of remainingSecurities) {
-      if (security.amount <= remainingAmountToSell) {
-        securitiesToSell.push(security);
-        remainingAmountToSell -= security.amount;
-      } else {
-        // Sell the remaining amount from this security, and exit the loop
-        const remainingSecurity = { ...security, amount: remainingAmountToSell };
-        securitiesToSell.push(remainingSecurity);
-        remainingAmountToSell = 0;
-        break;
-      }
-    }
+  if (numSold < numToSell) {
+    const remainingToSell = numToSell - numSold;
+    console.log(`Could not sell all securities for ${ticker} with purchaseDate ${matchingSecurities[0].purchaseDate}`);
+    console.log(`Trying to sell ${remainingToSell} more securities with a later purchaseDate...`);
+    removeSecurityFromPortfolio(ticker, sellPrice, remainingToSell);
   }
-
-  // Update the portfolio by removing the sold securities
-  for (const security of securitiesToSell) {
-    const index = securitiesArray.findIndex(s => s === security);
-    if (index >= 0) {
-      securitiesArray.splice(index, 1);
-    }
-  }
-
+  securitiesArray.filter(security => security.amount > 0);
   localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
 }
