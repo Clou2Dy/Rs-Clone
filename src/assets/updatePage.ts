@@ -1,44 +1,51 @@
 import {createElement} from './functions'
 import {Security} from './types'
 import {securitiesArray} from '../app'
-import {addSecurityToPortfolio} from './addPage'
 import {totalPortfolioValue} from './renderPage'
 
 export function updateStockBlock(security: Security, lastPrice: string | null) {
     const securityPage = document.querySelector('.security-page');
     const stockInfoBlock = updateStockInfoBlock(security.name, security.ticker, lastPrice, security.amount);
     const inputContainer = createUpdateContainer();
+    const backgroundDimming = createElement('div', null, 'background-dimming');
+    const closeButton = createElement('div', null, 'close-button');
     const addToPortfolioButton = createElement('button', 'Покупка', 'add-to-portfolio-button');
     const removeToPortfolioButton = createElement('button', 'Продажа', 'remove-to-portfolio-button');
 
-    const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
-    const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
-    //const dateInput = document.querySelector('.date-input') as HTMLInputElement;
-    
+    stockInfoBlock.appendChild(inputContainer);
+    stockInfoBlock.appendChild(closeButton);
+    stockInfoBlock.appendChild(addToPortfolioButton);
+    stockInfoBlock.appendChild(removeToPortfolioButton);
+    securityPage?.appendChild(stockInfoBlock);
+    securityPage?.appendChild(backgroundDimming);
+    stockInfoBlock.classList.add('show'); /* add the 'show' class */
+
     addToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
       const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
-      updateSecurityToPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value),);
-      console.log('Обновили ЦБ');
+      updateSecurityToPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value));
+      alert(`Вы приобрели ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
+      securityPage?.removeChild(stockInfoBlock);
+      securityPage?.removeChild(backgroundDimming);
     });
 
     removeToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
       const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
       removeSecurityFromPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value));
-      console.log('Продали ЦБ');
+      alert(`Вы продали ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
+      securityPage?.removeChild(stockInfoBlock);
+      securityPage?.removeChild(backgroundDimming);
     })
 
-    stockInfoBlock.appendChild(inputContainer);
-    stockInfoBlock.appendChild(addToPortfolioButton);
-    stockInfoBlock.appendChild(removeToPortfolioButton);
-    securityPage?.appendChild(stockInfoBlock);
-    stockInfoBlock.classList.add('show'); /* add the 'show' class */
+    closeButton.addEventListener('click', () => {
+      securityPage?.removeChild(stockInfoBlock);
+      securityPage?.removeChild(backgroundDimming);
+    });
 }
 
 function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: string | null, amount: number){
-    const typeBlock = createElement('div', `Акция`, 'type-information');
-    const closeButton = createElement('div', null, 'close-button');
+    const typeBlock = createElement('div', `Акция`, 'type-information');   
     const hrElement = createElement('hr', null, 'hr-line');
     const row = createElement('div', null, 'row-name-ticker');
     const tickerBlock = createElement('div', `${ticker || ''}`, 'ticker-information');
@@ -71,22 +78,14 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     priceBlock.appendChild(amountText);
     priceBlock.appendChild(amountSecurity);
 
-    const backgroundDimming = createElement('div', null, 'background-dimming');
     const stockInfoBlock = createElement('div', null, 'stock-information');
     stockInfoBlock.appendChild(typeBlock);
-    stockInfoBlock.appendChild(closeButton);
+    
     stockInfoBlock.appendChild(hrElement);
     stockInfoBlock.appendChild(row);
     stockInfoBlock.appendChild(priceBlock);
     stockInfoBlock.appendChild(hrElement2);
 
-    const securityPage = document.querySelector('.security-page')
-    securityPage?.appendChild(backgroundDimming);
-    closeButton.addEventListener('click', () => {
-        securityPage?.removeChild(stockInfoBlock);
-        securityPage?.removeChild(backgroundDimming);
-    });
-  
     return stockInfoBlock;
 }
 

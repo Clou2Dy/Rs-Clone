@@ -224,16 +224,17 @@
     height: 1px;
     content: "";
 }
+
 .stock-element:last-child::after{
     content: none;
 }
-
 
 .stock-row {
     display: flex;
     justify-content: space-between;
     margin: 10px 0 10px 0;
 }
+
 .stock-quotes {
     width: 25%;
     text-align: end;
