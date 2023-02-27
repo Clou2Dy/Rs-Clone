@@ -25,7 +25,7 @@ export function updateStockBlock(security: Security, lastPrice: string | null) {
     removeToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
       const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
-      removeSecurityFromPortfolio(security.ticker, Number(quantityInput.value), Number(purchasePriceInput.value));
+      removeSecurityFromPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value));
       console.log('Продали ЦБ');
     })
 
@@ -143,8 +143,17 @@ function updateSecurityToPortfolio(ticker: string, purchasePrice: number, quanti
   }
 }
 
-
 function removeSecurityFromPortfolio(ticker: string, purchasePrice: number, quantity: number) {
-
-  localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
+  const matchingSecurity = securitiesArray.find(security => security.ticker === ticker);
+  if (matchingSecurity) {
+    const newAmount = matchingSecurity.amount - quantity;
+    if (newAmount === 0) {
+      securitiesArray.splice(securitiesArray.indexOf(matchingSecurity), 1);
+    } else if (newAmount > 0) {
+      matchingSecurity.amount = newAmount;
+    }
+    localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
+    return purchasePrice * quantity;
+  }
+  return 0;
 }
