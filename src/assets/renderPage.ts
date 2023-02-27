@@ -2,7 +2,7 @@ import {createElement} from './functions';
 import {calculateTotalSum, calculateTotalProfit} from './functions'
 import {updateSecuritiesArray} from './data'
 import {securitiesArray} from '../app'
-import {displayListSecurities} from './animationPage'
+import {displayListSecurities, handleSecurityClick} from './animationPage'
 import {renderSearchPage} from './searchPage'
 export let totalPortfolioValue: number;
 
@@ -22,6 +22,7 @@ export async function displaySecurityPage() {
     await renderSecurityBlock('Акции', 'stock', mainBlock);
     await renderSecurityBlock('Облигации','bond', mainBlock);
     await renderSecurityBlock('БПИФ', 'etf', mainBlock);
+    handleSecurityClick();
 }
 
 async function renderHeaderBlock(container: HTMLElement){
@@ -105,7 +106,7 @@ async function renderSecurityBlock(name: string, type: string, container: HTMLEl
         info.appendChild(arrowBlock)
     const list = createElement('div', null, `${type}-list`);
     block.appendChild(list);
-    lastPriceArray.forEach(el => displayListSecurities(el, list))
+    lastPriceArray.forEach(el => displayListSecurities(el, list));
 }
 
 async function renderAddButton(container: HTMLElement) {

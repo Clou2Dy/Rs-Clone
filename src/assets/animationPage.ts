@@ -1,5 +1,8 @@
 import {Security} from './types'
 import {createElement} from './functions';
+import {securitiesArray} from '../app';
+import {updateStockBlock} from './updatePage'
+import {moexGetTickerPrice} from './api'
 
 export function displayListSecurities (obj: Security, container: HTMLElement) {
     if (obj.lastPrice) {
@@ -7,6 +10,7 @@ export function displayListSecurities (obj: Security, container: HTMLElement) {
         const profit = ((obj.lastPrice - obj.purchasePrice) * obj.amount).toFixed(2);
         const procent = (100*(+profit / +price)).toFixed(2);
         const block = createElement('div', null, `security-block`);
+        block.id = obj.ticker;
         container.appendChild(block);
             const secInfo = createElement('div', null, `security-info`);
             block.appendChild(secInfo);
@@ -31,5 +35,27 @@ export function displayListSecurities (obj: Security, container: HTMLElement) {
                         secResult.classList.add('red-color');
                         secProcent.classList.add('red-color');
                     }  
+    }
+}
+
+export function handleSecurityClick() {    
+    const parentElement = document.querySelector('.main-block');
+    
+    if (parentElement) {
+        parentElement.addEventListener('click', event => {
+            const stockElement = (event.target as HTMLElement).closest('.security-block');
+            if (stockElement) {
+                const securityExists = securitiesArray.some(security => security.ticker === stockElement.id);
+                if (securityExists) {
+                    const security = securitiesArray.find(security => security.ticker === stockElement.id);
+                    if (security) {
+                        moexGetTickerPrice(stockElement.id).then(res => {
+                            updateStockBlock(security, res.toString());
+                        });
+                    }
+                }
+                
+            }
+        })
     }
 }
