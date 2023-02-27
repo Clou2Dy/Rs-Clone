@@ -4,7 +4,6 @@ import {securitiesArray} from '../app'
 
 function createStockInfoBlock(name: string | null, ticker: string | null, last: string | null): HTMLElement {
     const typeBlock = createElement('div', `Акция`, 'type-information');
-    const closeButton = createElement('div', null, 'close-button');
     const hrElement = createElement('hr', null, 'hr-line');
     const row = createElement('div', null, 'row-name-ticker');
     const tickerBlock = createElement('div', `${ticker || ''}`, 'ticker-information');
@@ -19,22 +18,14 @@ function createStockInfoBlock(name: string | null, ticker: string | null, last: 
     priceBlock.appendChild(priceText);
     priceBlock.appendChild(priceValue);
 
-    const backgroundDimming = createElement('div', null, 'background-dimming');
+    
     const stockInfoBlock = createElement('div', null, 'stock-information');
     stockInfoBlock.appendChild(typeBlock);
-    stockInfoBlock.appendChild(closeButton);
     stockInfoBlock.appendChild(hrElement);
     stockInfoBlock.appendChild(row);
     stockInfoBlock.appendChild(priceBlock);
     stockInfoBlock.appendChild(hrElement2);
 
-    const securityPage = document.querySelector('.security-page')
-    securityPage?.appendChild(backgroundDimming);
-    closeButton.addEventListener('click', () => {
-        securityPage?.removeChild(stockInfoBlock);
-        securityPage?.removeChild(backgroundDimming);
-    });
-  
     return stockInfoBlock;
   }
   
@@ -59,9 +50,10 @@ export function createInputContainer(): HTMLElement {
   
   export function createStockBlock(name: string | null, ticker: string | null, last: string | null) {
     const securityPage = document.querySelector('.security-page')
-  
+    const backgroundDimming = createElement('div', null, 'background-dimming');
     const stockInfoBlock = createStockInfoBlock(name, ticker, last);
     const inputContainer = createInputContainer();
+    const closeButton = createElement('div', null, 'close-button');
   
     const addToPortfolioButton = createElement('button', 'Покупка', 'add-to-portfolio-button');
     addToPortfolioButton.id = 'add-stock-button';
@@ -78,13 +70,22 @@ export function createInputContainer(): HTMLElement {
         amount: Number(quantityInput.value),
         purchaseDate: new Date(dateInput.value),
       };
-    
+
+      alert(`Вы приобрели ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
+      securityPage?.removeChild(stockInfoBlock);
+      securityPage?.removeChild(backgroundDimming);
       addSecurityToPortfolio(newSecurity);
+    });
+
+    closeButton.addEventListener('click', () => {
+      securityPage?.removeChild(stockInfoBlock);
+      securityPage?.removeChild(backgroundDimming);
     });
   
     stockInfoBlock.appendChild(inputContainer);
     stockInfoBlock.appendChild(addToPortfolioButton);
     securityPage?.appendChild(stockInfoBlock);
+    securityPage?.appendChild(backgroundDimming);
     stockInfoBlock.classList.add('show'); /* add the 'show' class */
 }
 

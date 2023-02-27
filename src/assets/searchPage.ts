@@ -1,5 +1,5 @@
 import {createElement} from './functions'
-import {getStocksTickers} from './api'
+import {getStocksTickers, getBondsTickers} from './api'
 import {createStockBlock} from './addPage'
 import {updateStockBlock} from './updatePage'
 import {securitiesArray} from '../app'
@@ -18,10 +18,12 @@ export async function renderSearchPage(){
         pageContainer.appendChild(searchBlock);
         
         const arrayStocksTickers = await getStocksTickers();
+        const arrayBondsTickers = await getBondsTickers();
         const searchInput = document.querySelector('.input-sec') as HTMLInputElement;
         if (searchInput) {
             searchInput.addEventListener('input', () => {
-                renderTickers(searchTickers(searchInput, arrayStocksTickers));
+                renderStoks(searchTickers(searchInput, arrayStocksTickers));
+                //renderTickers(searchTickers(searchInput, arrayBondsTickers));
             });
         }
         handleStockClick(); 
@@ -38,7 +40,7 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
     return filteredTickers;
 }
 
-function renderTickers(filteredStoks: Array<Array<string | number>>) {
+function renderStoks(filteredStoks: Array<Array<string | number>>) {
     const parentElement = document.querySelector('.search-block');
     if (parentElement) {
         while (parentElement?.firstChild) {
