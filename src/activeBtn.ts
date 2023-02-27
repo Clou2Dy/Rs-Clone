@@ -1,15 +1,3 @@
-export function butt(){
-    // document.addEventListener('click', function(el:any){
-    //     let day =  document.querySelector('.expensesDay')
-    //     let tom = document.querySelector('.expensesTom')
-    //     let last = document.querySelector('.expensesLast')
-    //     document.querySelector('.expensesDay')!.addEventListener('click', ()=>{
-    //         document.querySelector<HTMLElement>('.expensesDay')!.classList.toggle('back')
-    //     })
-    // })
-    
-}
-
 export function checkInp(){
     document.querySelector<HTMLButtonElement>('.disa').disabled = true 
     document.querySelector('.inpMoney').addEventListener('input',function(){
@@ -20,11 +8,14 @@ export function checkInp(){
         } 
     })  
 }
+export let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
 
 export function moneyCount (){
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
         let money:number = +document.querySelector('.spentMoney').textContent
-        let val:number = +document.querySelector<HTMLInputElement>('.inpMoney').value
+        let itogo:number = +document.querySelector('.itogoMoney').textContent
         document.querySelector('.spentMoney').textContent = String(money+val)
+        // if()
+        document.querySelector('.itogoMoney').textContent = String(itogo-val +'Br')
     })
 }

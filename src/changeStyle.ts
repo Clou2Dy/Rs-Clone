@@ -1,4 +1,4 @@
-import { butt, moneyCount, checkInp } from "./activeBtn"
+import {moneyCount, checkInp } from "./activeBtn"
 export default function addSpending (){
     document.querySelector('.addExpenses')!.addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney')!.style.display = 'block'
@@ -29,7 +29,6 @@ export default function addSpending (){
         document.querySelector<HTMLElement>('.paragraphIncome').classList.add('paragraphIncomeActive')
         document.querySelector<HTMLElement>('.paragraphExpenses').classList.remove('paragraphExpensesActive')
     })
-    butt()
     moneyCount()
     checkInp()
 }

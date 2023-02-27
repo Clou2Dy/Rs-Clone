@@ -38,6 +38,9 @@ body{
 .underline{
   position: relative;
 }
+.underline:hover{
+  cursor: pointer;
+}
 .underline:hover:before {
   transform: scaleX(1);
   transition: transform 0.25s;
@@ -70,12 +73,18 @@ body{
         width: 200px;
       }
       .itogo{
-        font-size: 20px;
+        display:flex;
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+        font-size: 30px;
         font-weight: 500;
-        
         margin: 0px;
         .itogoImg{
-
+          margin-top: 10px;
+          width: 30px;
+          background-image: url('./assets/icons8-cash-30.png');
+          background-repeat: no-repeat;
         }
       }
       h3{
@@ -149,7 +158,9 @@ body{
       background-position:center;
       background-size: 50% 2px,2px 50%;
       background-repeat:no-repeat;
-      
+    }
+    .addExpenses:hover{
+      cursor: pointer;
     }
   }
 }

@@ -1,4 +1,5 @@
 import * as moment from "moment"
+import val fr
 let img:string 
 var text:any
 export  function addUnd():any {
@@ -65,7 +66,6 @@ export function block(){
         const blockSpending = `<div class='blockContent'> <div class='col imgDiv'><img src = ${img}></div> <div class='col nameSpending'>${text}</div> <div class='col rasxoMoney'>${document.querySelector<HTMLInputElement>('.inpMoney').value +' BYN'}</div> <div class='col procent'> ${document.querySelector('.spentMoney').textContent == String(0) ? '100%' : Math.round((+document.querySelector<any>('.inpMoney').value / +document.querySelector('.spentMoney').textContent) * 100)+'%'}</div> <div class='col expensesDateBlock'>${time}</div> <div class="col dropdown"><button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"><li><a class="dropdown-item" href="#">${document.querySelector<HTMLInputElement>('.inpCom').value}</a></li></ul></div> <div class='delete'></div> </div>`
         let block = document.createElement('div')
         block.classList.add(`row`, `block${i}`, `block`, `${blo}`)
-        console.log(blo);
         block.innerHTML = blockSpending
         link.appendChild(block)
     })
