@@ -1,5 +1,5 @@
 import * as moment from "moment"
-import val fr
+// import val fr
 let img:string 
 var text:any
 export  function addUnd():any {
