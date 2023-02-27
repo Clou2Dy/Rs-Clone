@@ -13,22 +13,20 @@ export function updateStockBlock(security: Security, lastPrice: string | null) {
 
     const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
     const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
-    const dateInput = document.querySelector('.date-input') as HTMLInputElement;
+    //const dateInput = document.querySelector('.date-input') as HTMLInputElement;
     
     addToPortfolioButton.addEventListener('click', () => {
-      const newSecurity: Security = {
-        type: 'stock',
-        ticker: security.ticker || '',
-        name: security.name|| '',
-        purchasePrice: Number(purchasePriceInput.value),
-        amount: Number(quantityInput.value),
-        purchaseDate: new Date(dateInput.value),
-      };
-      addSecurityToPortfolio(newSecurity);
+      const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
+      const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
+      updateSecurityToPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value),);
+      console.log('Обновили ЦБ');
     });
 
     removeToPortfolioButton.addEventListener('click', () => {
-      removeSecurityFromPortfolio(security.ticker, Number(quantityInput.value), Number(purchasePriceInput.value))
+      const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
+      const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
+      removeSecurityFromPortfolio(security.ticker, Number(quantityInput.value), Number(purchasePriceInput.value));
+      console.log('Продали ЦБ');
     })
 
     stockInfoBlock.appendChild(inputContainer);
@@ -131,30 +129,22 @@ function createUpdateContainer(): HTMLElement {
   return inputContainer;
 }
 
-export function removeSecurityFromPortfolio(ticker: string, sellPrice: number, numToSell: number): void {
-  const matchingSecurities = securitiesArray.filter(security => security.ticker === ticker);
-  matchingSecurities.sort((a, b) => a.purchaseDate!.getTime() - b.purchaseDate!.getTime());
-  let numSold = 0;
-  for (const security of matchingSecurities) {
-    const numAvailable = security.amount - numSold;
-    if (numAvailable <= 0) {
-      continue;
-    }
-    const sellAmount = Math.min(numAvailable, numToSell);
-    const profitLoss = sellAmount * (sellPrice - security.purchasePrice);
-    security.amount -= sellAmount;
-    numSold += sellAmount;
-    console.log(`Sold ${sellAmount} ${ticker} securities for a profit/loss of ${profitLoss} ₽`);
-    if (numSold >= numToSell) {
-      break;
-    }
+function updateSecurityToPortfolio(ticker: string, purchasePrice: number, quantity: number) {
+  const matchingSecurity = securitiesArray.find(security => security.ticker === ticker);
+  
+  if (matchingSecurity) {
+    const newAmount = matchingSecurity.amount + quantity;
+    const newPurchasePrice = (matchingSecurity.purchasePrice * matchingSecurity.amount + purchasePrice * quantity) / newAmount;
+
+    matchingSecurity.amount = newAmount;
+    matchingSecurity.purchasePrice = newPurchasePrice;
+
+    localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
   }
-  if (numSold < numToSell) {
-    const remainingToSell = numToSell - numSold;
-    console.log(`Could not sell all securities for ${ticker} with purchaseDate ${matchingSecurities[0].purchaseDate}`);
-    console.log(`Trying to sell ${remainingToSell} more securities with a later purchaseDate...`);
-    removeSecurityFromPortfolio(ticker, sellPrice, remainingToSell);
-  }
-  securitiesArray.filter(security => security.amount > 0);
+}
+
+
+function removeSecurityFromPortfolio(ticker: string, purchasePrice: number, quantity: number) {
+
   localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
 }
