@@ -22,8 +22,8 @@ export async function renderSearchPage(){
         const searchInput = document.querySelector('.input-sec') as HTMLInputElement;
         if (searchInput) {
             searchInput.addEventListener('input', () => {
-                renderStoks(searchTickers(searchInput, arrayStocksTickers));
-                //renderTickers(searchTickers(searchInput, arrayBondsTickers));
+                renderStoks(searchTickers(searchInput, arrayStocksTickers), 'АКЦИИ');
+                renderStoks(searchTickers(searchInput, arrayBondsTickers), 'ОБЛИГАЦИИ');
             });
         }
         handleStockClick(); 
@@ -40,13 +40,13 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
     return filteredTickers;
 }
 
-function renderStoks(filteredStoks: Array<Array<string | number>>) {
+function renderStoks(filteredStoks: Array<Array<string | number>>, name: string) {
     const parentElement = document.querySelector('.search-block');
     if (parentElement) {
         while (parentElement?.firstChild) {
             parentElement.removeChild(parentElement.firstChild);
         }
-        const headerStocks = createElement ('div', 'АКЦИИ', 'header-stocks')
+        const headerStocks = createElement ('div', `${name}`, 'header-stocks')
         parentElement.appendChild(headerStocks);
         const stocksBlock = createElement ('div', null, 'stocks-block')
         parentElement.appendChild(stocksBlock);
