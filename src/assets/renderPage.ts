@@ -60,16 +60,6 @@ async function renderHeaderBlock(container: HTMLElement){
                 headerBlockProfit.appendChild(periodBlock);
                 const periodAll = createElement('span', 'фин. результат за все время ', 'period-all');
                 periodBlock.appendChild(periodAll);
-                /*
-                    const periodArrowsDown = createElement('i', null, 'period-arrows_down');
-                    periodAll.appendChild(periodArrowsDown);
-
-                const periodMonth = createElement('span', 'за месяц ', 'period-month');
-                periodBlock.appendChild(periodMonth);
-                periodMonth.style.display = 'none';
-                    const periodArrowsUp = createElement('i', null, 'period-arrows_up');
-                    periodMonth.appendChild(periodArrowsUp);
-                */
 }
 
 async function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
@@ -109,17 +99,29 @@ async function renderSecurityBlock(name: string, type: string, container: HTMLEl
     lastPriceArray.forEach(el => displayListSecurities(el, list));
 }
 
-async function renderAddButton(container: HTMLElement) {
+function renderAddButton(container: HTMLElement) {
     const addButtonContainer = createElement('div', null, 'add-button__container');
     container.appendChild(addButtonContainer);
     const inputElement = createElement('input', null, 'input-sec') as HTMLInputElement;
     inputElement.defaultValue = 'Компания, тикер, ISIN';
     inputElement.setAttribute('type', 'text');
+    const closeButtonInput = createElement('div', null, 'close-button-input');
     const mainBlock = document.querySelector('.main-block') as HTMLElement;
+    addButtonContainer.appendChild(inputElement);
+    addButtonContainer.appendChild(closeButtonInput);
+
     inputElement.addEventListener('click', () => {
         inputElement.defaultValue = '';
         mainBlock.style.display = 'none';
         renderSearchPage();
+        closeButtonInput.style.display = 'block';
     });
-    addButtonContainer.appendChild(inputElement);
+
+    closeButtonInput.addEventListener('click', () => {
+        inputElement.defaultValue = 'Компания, тикер, ISIN';
+        mainBlock.style.display = 'block';
+        const searchBlock = document.querySelector('.search-block') as HTMLElement;
+        searchBlock.style.display = 'none';
+        closeButtonInput.style.display = 'none';
+    });
 }
