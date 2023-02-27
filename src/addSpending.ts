@@ -25,6 +25,9 @@ export  function addUnd():any {
             el.target.classList.add('backBlock')
             
        }else if(el.target.className === 'imgName' || 'imgBlock' === el.target.className){
+            document.querySelectorAll('.backImg').forEach(element => {
+                element.classList.remove('backBlock')
+            })
            el.target.parentElement.classList.add('backBlock')
         }
     }) 
