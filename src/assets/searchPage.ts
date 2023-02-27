@@ -7,6 +7,7 @@ import {securitiesArray} from '../app'
 export async function renderSearchPage(){
     const pageContainer = document.querySelector('.security-page__container');
     const searchBlock = createElement('div', null, 'search-block');
+    
     if (pageContainer) {
         const existingSearchBlock = pageContainer.querySelector('.search-block');
         if (existingSearchBlock) {
@@ -82,6 +83,7 @@ function renderStoks(filteredStoks: Array<Array<string | number>>, name: string)
         });
     }
 }
+
 
 function handleStockClick() {    
     const parentElement = document.querySelector('.search-block');
