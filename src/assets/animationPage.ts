@@ -21,11 +21,15 @@ export function displayListSecurities (obj: Security, container: HTMLElement) {
                     secFin.appendChild(secPrice);
                     const secProfit = createElement('div', null, `security-profit`);
                     secFin.appendChild(secProfit);
-                    const secResult = createElement('div', `${profit} ₽`, `security-result`);
+                    const secResult = createElement('div', `${profit} ₽ `, `security-result`);
                     secProfit.appendChild(secResult);
                     const secDot = createElement('span', `/`, 'dot-block');
                     secProfit.appendChild(secDot)
                     const secProcent = createElement('div', ` ${procent} %`, `security-procent`);
-                    secProfit.appendChild(secProcent);  
+                    secProfit.appendChild(secProcent);
+                    if (+profit < 0) {
+                        secResult.classList.add('red-color');
+                        secProcent.classList.add('red-color');
+                    }  
     }
 }

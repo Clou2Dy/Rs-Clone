@@ -50,11 +50,16 @@ async function renderHeaderBlock(container: HTMLElement){
                 profitBlock.appendChild(profitLine);
                 const profitProcent = createElement('span', `${(100*(totalResult / totalPortfolioValue)).toFixed(2)} %`, 'profit-procent');
                 profitBlock.appendChild(profitProcent);
+                if (totalResult < 0) {
+                    profitRubles.classList.add('red-color');
+                    profitProcent.classList.add('red-color');
+                } 
 
             const periodBlock = createElement('div', null, 'period-block');
                 headerBlockProfit.appendChild(periodBlock);
-                const periodAll = createElement('span', 'за все время ', 'period-all');
+                const periodAll = createElement('span', 'фин. результат за все время ', 'period-all');
                 periodBlock.appendChild(periodAll);
+                /*
                     const periodArrowsDown = createElement('i', null, 'period-arrows_down');
                     periodAll.appendChild(periodArrowsDown);
 
@@ -63,6 +68,7 @@ async function renderHeaderBlock(container: HTMLElement){
                 periodMonth.style.display = 'none';
                     const periodArrowsUp = createElement('i', null, 'period-arrows_up');
                     periodMonth.appendChild(periodArrowsUp);
+                */
 }
 
 async function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
@@ -84,7 +90,16 @@ async function renderSecurityBlock(name: string, type: string, container: HTMLEl
                 profitTitle.appendChild(resultBlock)
                 const dotBlock = createElement('span', ' / ', 'dot-block');
                 profitTitle.appendChild(dotBlock)
-                const procentBlock = createElement('span', `${(100*(totalResult / totalSum)).toFixed(2)} %`, `procent-${type}`);
+                let procent;
+                if (totalSum === 0) {
+                    procent = 0;
+                } else {
+                    procent = (100*(totalResult / totalSum)).toFixed(2)
+                }
+                const procentBlock = createElement('span', `${procent } %`, `procent-${type}`);
+                if (totalResult < 0) {
+                    procentBlock.classList.add ('red-color');
+                }
                 profitTitle.appendChild(procentBlock)
         const arrowBlock = createElement('div', null, 'arrow-block');
         info.appendChild(arrowBlock)
