@@ -23,7 +23,7 @@ export async function renderSearchPage(){
         if (searchInput) {
             searchInput.addEventListener('input', () => {
                 renderStoks(searchTickers(searchInput, arrayStocksTickers), 'АКЦИИ');
-                renderStoks(searchTickers(searchInput, arrayBondsTickers), 'ОБЛИГАЦИИ');
+                //renderStoks(searchTickers(searchInput, arrayBondsTickers), 'ОБЛИГАЦИИ');
             });
         }
         handleStockClick(); 
