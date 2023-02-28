@@ -1,5 +1,5 @@
 import {createElement} from './functions'
-import {getStocksTickers, getBondsTickers} from './api'
+import {getStocksTickers, getBondsTickers, getEtfTickers} from './api'
 import {createStockBlock} from './addPage'
 import {updateStockBlock} from './updatePage'
 import {securitiesArray} from '../app'
@@ -20,11 +20,16 @@ export async function renderSearchPage(){
         
         const arrayStocksTickers = await getStocksTickers();
         const arrayBondsTickers = await getBondsTickers();
+        const arrayEtfTickers = await getEtfTickers();
         const searchInput = document.querySelector('.input-sec') as HTMLInputElement;
         if (searchInput) {
             searchInput.addEventListener('input', () => {
+                while (searchBlock.firstChild) {
+                    searchBlock.removeChild(searchBlock.firstChild);
+                }
                 renderStoks(searchTickers(searchInput, arrayStocksTickers), 'АКЦИИ');
-                //renderStoks(searchTickers(searchInput, arrayBondsTickers), 'ОБЛИГАЦИИ');
+                renderStoks(searchTickers(searchInput, arrayBondsTickers), 'ОБЛИГАЦИИ');
+                renderStoks(searchTickers(searchInput, arrayEtfTickers), 'БПИФ');
             });
         }
         handleStockClick(); 
@@ -44,9 +49,6 @@ function searchTickers(inputElement: HTMLInputElement, array: Array<Array<string
 function renderStoks(filteredStoks: Array<Array<string | number>>, name: string) {
     const parentElement = document.querySelector('.search-block');
     if (parentElement) {
-        while (parentElement?.firstChild) {
-            parentElement.removeChild(parentElement.firstChild);
-        }
         const headerStocks = createElement ('div', `${name}`, 'header-stocks')
         parentElement.appendChild(headerStocks);
         const stocksBlock = createElement ('div', null, 'stocks-block')

@@ -24,8 +24,8 @@ export async function getStocksTickers() {
     const response = await fetch('https://iss.moex.com/iss/engines/stock/markets/shares/securities/.json');
     const json = await response.json();
     const data =  json.securities.data;
-    console.dir (data)
     const tqbr = data.filter((elem: Array<string | number>) => elem[1] === 'TQBR');
+    console.dir (tqbr)
     return tqbr;
   } catch (error) {
     console.error(error);
@@ -38,9 +38,23 @@ export async function getBondsTickers() {
     const response = await fetch('https://iss.moex.com/iss/engines/stock/markets/bonds/securities/.json');
     const json = await response.json();
     const data =  json.securities.data;
-    console.dir (data)
-    const tqob = data.filter((elem: Array<string | number>) => elem[1] === 'TQOB');
-    return tqob;
+    const tqcb = data.filter((elem: Array<string | number>) => elem[1] === 'TQCB');
+    console.dir (tqcb)
+    return tqcb;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+export async function getEtfTickers() {
+  try {
+    const response = await fetch('https://iss.moex.com/iss/engines/stock/markets/shares/securities/.json');
+    const json = await response.json();
+    const data =  json.securities.data;
+    const tqtf = data.filter((elem: Array<string | number>) => elem[1] === 'TQTF');
+    console.dir (tqtf)
+    return tqtf;
   } catch (error) {
     console.error(error);
     return [];
