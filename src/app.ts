@@ -15,8 +15,9 @@ displaySecurityPage();
 progress()
 data()
 block()
-addSpending()
 addUnd()
 income()
+addSpending()
+
 
 alert('Доброго врмени суток, не могли бы вы проверить нашу работу в конце кросс чека. Заранее благодарим и целуем. ♡♡♡')

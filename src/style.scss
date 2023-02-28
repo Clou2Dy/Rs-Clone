@@ -181,6 +181,9 @@ flex-direction: column;
         margin: 0px;
         padding: 0px;
       }
+      .delete:hover {
+        cursor: pointer;
+      }
       .rasxoMoney, .nameSpending, .expensesDateBlock, .procent{
         @include expensTextDecorating;
         @include white;
