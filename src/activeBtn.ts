@@ -8,14 +8,31 @@ export function checkInp(){
         } 
     })  
 }
-export let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
+// export let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
 
 export function moneyCount (){
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
-        let money:number = +document.querySelector('.spentMoney').textContent
+        let spent:number = +document.querySelector('.spentMoney').textContent
+        let earned:number = +document.querySelector('.earnedMoney').textContent
         let itogo:number = +document.querySelector('.itogoMoney').textContent
-        document.querySelector('.spentMoney').textContent = String(money+val)
-        // if()
-        document.querySelector('.itogoMoney').textContent = String(itogo-val +'Br')
+        let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
+        // document.querySelector('.itogoMoney').textContent = String(itogo)
+        document.querySelector('.spentMoney').textContent = String(spent+val)
+        document.querySelector('.earnedMoney').textContent = String(earned+val)
+        if(document.querySelector('.paragraphIncomeActive')){
+            document.querySelector('.itogoMoney').textContent = String(itogo+val)
+            console.log(itogo+val)
+        }else{
+            document.querySelector('.itogoMoney').textContent = String(itogo-val)
+            console.log(itogo-val);
+        }
+        if(+document.querySelector('.itogoMoney').textContent > 0 ){
+            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'green'
+        }else if (+document.querySelector('.itogoMoney').textContent < 0 ){
+            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'red'
+        }else{
+            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'white'
+        }
+        // localStorage.setItem('itogo', String(itogo))
     })
 }
