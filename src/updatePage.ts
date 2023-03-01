@@ -46,7 +46,7 @@ export function updateStockBlock(security: Security, lastPrice: string | null) {
 
 function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: string | null, amount: number){
     const typeBlock = createElement('div', `Акция`, 'type-information');   
-    const hrElement = createElement('hr', null, 'hr-line');
+    const hrElement = createElement('div', null, 'hr-line');
     const row = createElement('div', null, 'row-name-ticker');
     const tickerBlock = createElement('div', `${ticker || ''}`, 'ticker-information');
     const nameBlock = createElement('div', `${name || ''}`, 'name-information');
@@ -66,7 +66,7 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     } else if (finResult < 0) {
       financialResults.classList.add('red');
     }
-    const hrElement2 = createElement('hr', null, 'hr-line');
+    const hrElement2 = createElement('div', null, 'hr-line');
   
     row.appendChild(tickerBlock);
     row.appendChild(nameBlock);

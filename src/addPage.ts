@@ -1,6 +1,7 @@
 import {createElement} from './functions'
 import {Security} from './types'
 import {securitiesArray} from './app'
+import {displaySecurityPage} from './renderPage'
 
 function createStockInfoBlock(name: string | null, ticker: string | null, last: string | null): HTMLElement {
     const typeBlock = createElement('div', `Акция`, 'type-information');
@@ -75,6 +76,7 @@ export function createInputContainer(): HTMLElement {
       securityPage?.removeChild(stockInfoBlock);
       securityPage?.removeChild(backgroundDimming);
       addSecurityToPortfolio(newSecurity);
+      displaySecurityPage();
     });
 
     closeButton.addEventListener('click', () => {
@@ -84,6 +86,7 @@ export function createInputContainer(): HTMLElement {
   
     stockInfoBlock.appendChild(inputContainer);
     stockInfoBlock.appendChild(addToPortfolioButton);
+    stockInfoBlock.appendChild(closeButton);
     securityPage?.appendChild(stockInfoBlock);
     securityPage?.appendChild(backgroundDimming);
     stockInfoBlock.classList.add('show'); /* add the 'show' class */

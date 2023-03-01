@@ -21,6 +21,10 @@ export function moneyCount (){
             document.querySelector<HTMLElement>('.itogoMoney').style.color = 'white'
             }
     }
+    if(localStorage.getItem('spent')){
+        document.querySelector('.spentMoney').textContent = localStorage.getItem('spent')
+    }
+
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
     let spent:number = +document.querySelector('.spentMoney').textContent
     // let earned:number = +document.querySelector('.earnedMoney').textContent
@@ -44,5 +48,7 @@ export function moneyCount (){
     document.querySelector<HTMLElement>('.itogoMoney').style.color = 'white'
     }
     localStorage.setItem('itogo', document.querySelector('.itogoMoney').textContent)
-    })   
+    localStorage.setItem('spent', document.querySelector('.spentMoney').textContent)
+    })
+       
     }

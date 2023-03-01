@@ -7,10 +7,12 @@ import {renderSearchPage} from './searchPage'
 export let totalPortfolioValue: number;
 
 export async function displaySecurityPage() {
-    const securitiesPage = createElement('div', null, 'security-page');
+    const securitiesPage = createElement('section', null, 'security-page');
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');   
     securitiesPage.appendChild(securitiesPageContainer);
+    const closeMainButton = createElement('div', null, 'close-main-button');
+    securitiesPage.appendChild(closeMainButton);
 
     const headerBlock = createElement('div', null, 'header-block');
     securitiesPageContainer.appendChild(headerBlock);
@@ -23,6 +25,10 @@ export async function displaySecurityPage() {
     await renderSecurityBlock('Облигации','bond', mainBlock);
     await renderSecurityBlock('БПИФ', 'etf', mainBlock);
     handleSecurityClick();
+
+    closeMainButton.addEventListener('click', () => {
+        securitiesPage.style.display = 'none'
+      });
 }
 
 async function renderHeaderBlock(container: HTMLElement){
