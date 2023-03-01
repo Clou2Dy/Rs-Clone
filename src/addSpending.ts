@@ -4,7 +4,15 @@ let img:string
 var text:any
 export  function addUnd():any {
     document.querySelector('.balanceChange').addEventListener('click',()=>{
-        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+            document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+        
+        if(+document.querySelector('.balance').textContent > 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'green'
+            }else if (+document.querySelector('.balance').textContent < 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'red'
+            }else{
+            document.querySelector<HTMLElement>('.balance').style.color = 'white'
+            }
     })
     document.addEventListener('click',(el:any)=>{
         if (el.target.classList.contains('date') === true){
@@ -68,7 +76,9 @@ export function block(){
         }
     })
 
-   
+    document.querySelector('.balanceChange').addEventListener('click',()=>{
+        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+    })
     
     document.querySelector('.disa').addEventListener('click', ()=>{
         
