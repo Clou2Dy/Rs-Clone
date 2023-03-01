@@ -11,6 +11,7 @@ export  function addUnd():any {
             document.querySelector<HTMLElement>('.balance').style.color = 'red'
             }else{
             document.querySelector<HTMLElement>('.balance').style.color = 'white'
+            document.querySelector<HTMLElement>('.balance').style.color = 'white'
             }
         localStorage.setItem('itogo', document.querySelector('.balance').textContent)
     })
@@ -88,7 +89,10 @@ export function block(){
             link = document.querySelector('.income')
         }
     })
-    
+
+    document.querySelector('.balanceChange').addEventListener('click',()=>{
+        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+    })
     
     document.querySelector('.disa').addEventListener('click', ()=>{
         

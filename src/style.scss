@@ -622,7 +622,9 @@ body{
             // margin-left: 20px;
             // top: 10px;
             // left: 56%;
-
+            .inpButton{
+              display: flex;
+            }
           }
           .buttonChangeMoney input{
             width: 100px;
