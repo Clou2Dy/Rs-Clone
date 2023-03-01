@@ -3,6 +3,9 @@ import * as moment from "moment"
 let img:string 
 var text:any
 export  function addUnd():any {
+    document.querySelector('.balanceChange').addEventListener('click',()=>{
+        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+    })
     document.addEventListener('click',(el:any)=>{
         if (el.target.classList.contains('date') === true){
             document.getElementById('expensesDay')!.classList.remove('back')
@@ -65,9 +68,7 @@ export function block(){
         }
     })
 
-    document.querySelector('.balanceChange').addEventListener('click',()=>{
-        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
-    })
+   
     
     document.querySelector('.disa').addEventListener('click', ()=>{
         
