@@ -698,6 +698,7 @@ body{
   }
 .main{
   flex: 1 1 auto;
+  margin-top: 25px;
 .blockInfo{
   display: flex;
   justify-content: center;
@@ -773,6 +774,9 @@ flex-direction: column;
         width: 5%;
         margin: 0px;
         padding: 0px;
+      }
+      .delete:hover{
+        cursor: pointer;
       }
       .rasxoMoney, .nameSpending, .expensesDateBlock, .procent{
         @include expensTextDecorating;

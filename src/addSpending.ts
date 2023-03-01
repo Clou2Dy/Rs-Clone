@@ -36,11 +36,19 @@ export  function addUnd():any {
     addEventListener('click', (el:any)=>{
         if(el.target.className === 'delete'){
             document.querySelector(`.${el.target.closest(".block").classList[1]}`).remove()
+            localStorage.setItem('spending', document.querySelector('.spending').innerHTML)
+            localStorage.setItem('income', document.querySelector('.income').innerHTML)
         }
     })
 }
 
 export function block(){
+    if(localStorage.getItem('spending')){
+        document.querySelector('.spending').insertAdjacentHTML('afterbegin',localStorage.getItem('spending'))  
+    }
+    if(localStorage.getItem('income')){
+        document.querySelector('.income').insertAdjacentHTML('afterbegin',localStorage.getItem('income'))  
+    }
     let i = 0
     let form  = ('DD.MM.YYYY'+' '+'HH:mm'+"")
     let time = moment().format(form)
@@ -62,15 +70,19 @@ export function block(){
     })
     
     document.querySelector('.disa').addEventListener('click', ()=>{
+        
         i++
         if(blo === undefined){
             blo = `ExpensesActive`
             link = document.querySelector('.spending')
         }
-        const blockSpending = `<div class='blockContent'> <div class='col imgDiv'><img src = ${img}></div> <div class='col nameSpending'>${text}</div> <div class='col rasxoMoney'>${document.querySelector<HTMLInputElement>('.inpMoney').value +' BYN'}</div> <div class='col procent'> ${document.querySelector('.spentMoney').textContent == String(0) ? '100%' : Math.round((+document.querySelector<any>('.inpMoney').value / +document.querySelector('.spentMoney').textContent) * 100)+'%'}</div> <div class='col expensesDateBlock'>${time}</div> <div class="col dropdown"><button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"><li><a class="dropdown-item" href="#">${document.querySelector<HTMLInputElement>('.inpCom').value}</a></li></ul></div> <div class='delete'></div> </div>`
+        const blockSpending = `<div class='blockContent' id=${text} > <div class='col imgDiv'><img src = ${img}></div> <div class='col nameSpending'>${text}</div> <div class='col rasxoMoney'>${document.querySelector<HTMLInputElement>('.inpMoney').value +' BYN'}</div> <div class='col procent'> ${document.querySelector('.spentMoney').textContent == String(0) ? '100%' : Math.round((+document.querySelector<any>('.inpMoney').value / +document.querySelector('.spentMoney').textContent) * 100)+'%'}</div> <div class='col expensesDateBlock'>${time}</div> <div class="col dropdown"><button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"><li><a class="dropdown-item" href="#">${document.querySelector<HTMLInputElement>('.inpCom').value}</a></li></ul></div> <div class='delete'></div> </div>`
         let block = document.createElement('div')
         block.classList.add(`row`, `block${i}`, `block`, `${blo}`)
         block.innerHTML = blockSpending
         link.appendChild(block)
+        localStorage.setItem('spending', document.querySelector('.spending').innerHTML)
+        localStorage.setItem('income', document.querySelector('.income').innerHTML)
     })
+    
 }
