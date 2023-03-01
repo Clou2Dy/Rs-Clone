@@ -8,7 +8,7 @@ export function checkInp(){
         } 
     })  
 }
-export let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
+// export let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
 
 export function moneyCount (){
     if(localStorage.getItem('itogo')){

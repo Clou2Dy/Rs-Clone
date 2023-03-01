@@ -10,136 +10,145 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <div class="container-fluid bigCont">
-            <div class="row headRow">
-                <div class="col-sm-9 colContent">
-                    <div class="itogo">
-                        <div class="itogoImg"></div>
-                        Итого:
-                        <div class="itogoMoney">0</div>
+    <div class="wrapper">
+        <header>
+            <div class="container-fluid bigCont">
+                <div class="row headRow">
+                    <div class="col-sm-9 colContent">
+                        <div class="itogo">
+                            <div class="itogoImg"></div>
+                            Итого:
+                            <div class="itogoMoney">0</div>
+                        </div>
+                    <h3 class="money"></h3>
+                    <div class="row rowExpens">
+                        <div class="col-8 col-sm-6">
+                        <h4 class="underline categoryExpenses">РАСХОДЫ</h4>
+                        </div>
+                        <div class="col-4 col-sm-6">
+                        <h4 class="underline categoryIncome">ДОХОДЫ</h4>
+                        </div>
+                        <div class="col-3 col-sm-6">
+                            <h4 class="underline categorySecurity">ЦЕННЫЕ БУМАГИ</h4>
+                        </div>
                     </div>
-                  <h3 class="money"></h3>
-                  <div class="row rowExpens">
-                    <div class="col-8 col-sm-6">
-                      <h4 class="underline categoryExpenses">РАСХОДЫ</h4>
                     </div>
-                    <div class="col-4 col-sm-6">
-                      <h4 class="underline categoryIncome">ДОХОДЫ</h4>
+                </div> 
+            </div>
+        </header>
+        <main class="main">
+            <div class="blockInfo">
+                <div class="info">
+                    <div class="timeInterval">
+                        <ul>
+                            <li class="underline" id="day">День</li>
+                            <li class="underline" id="week">Неделя</li>
+                            <li class="underline" id="month">Месяц</li>
+                            <li class="underline" id="year">Год</li>
+                        </ul>
+                        <div class="interval"></div>
                     </div>
-                    <div class="col-3 col-sm-6">
-                        <h4 class="underline categorySecurity">ЦЕННЫЕ БУМАГИ</h4>
-                      </div>
-                  </div>
-                </div>
-              </div> 
-        </div>
-    </header>
-    <main>
-        <div class="blockInfo">
-            <div class="info">
-                <div class="timeInterval">
-                    <ul>
-                        <li class="underline" id="day">День</li>
-                        <li class="underline" id="week">Неделя</li>
-                        <li class="underline" id="month">Месяц</li>
-                        <li class="underline" id="year">Год</li>
-                    </ul>
-                    <div class="interval"></div>
-                </div>
-                <div class="expenses">
-                    <div class="progress"></div>                  
-                    <div class="spentMoney">0</div>
-                    <div class="addExpenses"></div>
-                    
+                    <div class="expenses">
+                        <div class="progress"></div>                  
+                        <div class="spentMoney">0</div>
+                        <div class="addExpenses"></div>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid spending"></div>
-        <div class="container-fluid income" style="display: none;"></div>
-        <div class="container-fluid changeMoney">
-            <div class="row headMenu">
-                <i class=" row arrow left"></i>
-                <div class="col-sm-6 underline paragraphExpenses paragraphExpensesActive">РАСХОДЫ</div>
-                <div class="col-sm-6 underline paragraphIncome">ДОХОДЫ</div>
-                <input type="number" class="inpMoney">
-            </div>
-                <div class="container-fluid rashod">
-                    <p class="tagCategori">Категории</p>
-                <div class="row categoriExpenses">
-                    <div class="col-md-6 col-lg-3 col-sm-6 col-12 cafe backImg red" id="cafe">
-                        <img class="imgBlock" src="assets/cafe-50.png" alt="cafe">
-                        <p class="imgName">Кафе</p>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-sm-6  col-12 hom backImg yellow" id="home">
-                        <img class="imgBlock" src="assets/home-page-50.png" alt="home">
-                        <p class="imgName">Дом</p>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-sm-6 col-12 heal backImg green" id="heal">
-                        <img class="imgBlock" src="assets/hospital-50.png" alt="health">
-                        <p class="imgName">Здоровье</p>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-sm-6 col-12 family backImg pink" id="family">
-                        <img class="imgBlock" src="assets/family-50.png" alt="family">
-                        <p class="imgName">Семья</p>
-                    </div>
-                        <div class="col-md-6 col-lg-3 col-sm-6 col-12 gift backImg blue" id="gift">
-                            <img class="imgBlock" src="assets/gift-50.png" alt="gift">
+            <div class="container-fluid spending"></div>
+            <div class="container-fluid income" style="display: none;"></div>
+            <div class="container-fluid changeMoney">
+                <div class="row headMenu">
+                    <i class=" row arrow left"></i>
+                    <div class="col-sm-6 underline paragraphExpenses paragraphExpensesActive">РАСХОДЫ</div>
+                    <div class="col-sm-6 underline paragraphIncome">ДОХОДЫ</div>
+                    <input type="number" class="inpMoney">
+                </div>
+                    <div class="container-fluid rashod">
+                        <p class="tagCategori">Категории</p>
+                    <div class="row categoriExpenses">
+                        <div class="col-md-6 col-lg-3 col-sm-6 col-12 cafe backImg red" id="cafe">
+                            <img class="imgBlock" src="assets/cafe-50.png" alt="cafe">
+                            <p class="imgName">Кафе</p>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-sm-6  col-12 hom backImg yellow" id="home">
+                            <img class="imgBlock" src="assets/home-page-50.png" alt="home">
+                            <p class="imgName">Дом</p>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-sm-6 col-12 heal backImg green" id="heal">
+                            <img class="imgBlock" src="assets/hospital-50.png" alt="health">
+                            <p class="imgName">Здоровье</p>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-sm-6 col-12 family backImg pink" id="family">
+                            <img class="imgBlock" src="assets/family-50.png" alt="family">
+                            <p class="imgName">Семья</p>
+                        </div>
+                            <div class="col-md-6 col-lg-3 col-sm-6 col-12 gift backImg blue" id="gift">
+                                <img class="imgBlock" src="assets/gift-50.png" alt="gift">
+                                <p class="imgName">Подарки</p>
+                            </div>
+                            <div class="col-md-6 col-lg-3 col-sm-6 col-12 education backImg aqua" id="education">
+                                <img class="imgBlock" src="assets/school-50.png" alt="school">
+                                <p class="imgName">Образование</p>
+                            </div>
+                            <div class="col-md-6 col-lg-3 col-sm-6 col-12 question backImg blueviolet" id="question">
+                                <img class="imgBlock" src="assets/mark-50.png" alt="mark">
+                                <p class="imgName">Ещё</p>
+                            </div>
+                            </div>
+                </div>
+                <div class=" container-fluid doxod">
+                    <div class="row categoriExpenses">
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-12 bank backImg coral" id="bank">
+                            <img class="imgBlock" src="assets/money-box-50.png" alt="money">
+                            <p class="imgName">Вклады</p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-12 present backImg bisque" id="present">
+                            <img class="imgBlock" src="assets/cash-in-hand-50.png" alt="cash in hand">
                             <p class="imgName">Подарки</p>
                         </div>
-                        <div class="col-md-6 col-lg-3 col-sm-6 col-12 education backImg aqua" id="education">
-                            <img class="imgBlock" src="assets/school-50.png" alt="school">
-                            <p class="imgName">Образование</p>
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-12 salary backImg fuchsia" id="salary">
+                            <img class="imgBlock" src="assets/cash-50.png" alt="salary">
+                            <p class="imgName">Зарплата</p>
                         </div>
-                        <div class="col-md-6 col-lg-3 col-sm-6 col-12 question backImg blueviolet" id="question">
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-12 other backImg brown" id="other">
                             <img class="imgBlock" src="assets/mark-50.png" alt="mark">
-                            <p class="imgName">Ещё</p>
+                            <p class="imgName">Другое</p>
                         </div>
-                        </div>
-            </div>
-            <div class=" container-fluid doxod">
-                <div class="row categoriExpenses">
-                    <div class="col-md-4 col-lg-3 col-sm-6 col-12 bank backImg coral" id="bank">
-                        <img class="imgBlock" src="assets/money-box-50.png" alt="money">
-                        <p class="imgName">Вклады</p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-sm-6 col-12 present backImg bisque" id="present">
-                        <img class="imgBlock" src="assets/cash-in-hand-50.png" alt="cash in hand">
-                        <p class="imgName">Подарки</p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-sm-6 col-12 salary backImg fuchsia" id="salary">
-                        <img class="imgBlock" src="assets/cash-50.png" alt="salary">
-                        <p class="imgName">Зарплата</p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-sm-6 col-12 other backImg brown" id="other">
-                        <img class="imgBlock" src="assets/mark-50.png" alt="mark">
-                        <p class="imgName">Другое</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="container-fluid">
-                <div class="row rowDate">
-                    <div class="col-sm-4 col-md-4">
-                        <div class="date expensesDay back" id="expensesDay"></div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="date expensesTom"  id="expensesTom"></div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="date expensesLast" id="expensesLast"></div>
+                
+                <div class="container-fluid">
+                    <div class="row rowDate">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="date expensesDay back" id="expensesDay"></div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="date expensesTom"  id="expensesTom"></div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="date expensesLast" id="expensesLast"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="row">
 
-                <input class="inpCom" type="text" placeholder="Комментарий">
-                <button type="button" class="btn btn-success disa">Добавить</button>
-                <!-- <button type="button" class="btn btn-success"></button> -->
+                    <input class="inpCom" type="text" placeholder="Комментарий">
+                    <button type="button" class="btn btn-success disa">Добавить</button>
+                </div>
             </div>
-        </div>
-    </main>
-    <footer></footer>
-    <div class="zatemFon"></div>
+        </main>
+        <footer>
+            <div class="container-fluid footerContainer">
+                <div class="row footerRow">
+                    <div class="col"><img src="" alt=""></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- <div class="zatemFon"></div> -->
 </body>
 </html>
