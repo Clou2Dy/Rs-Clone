@@ -22,7 +22,7 @@ progress()
 
 
 alert(`Доброго врмени суток, не могли бы вы проверить нашу работу в конце кросс чека. Заранее благодарим и целуем. ♡♡♡  Ссылка на PR в консоли разработчика`)
-console.log('https://clou2dy.github.io/Rs-Clone/public/index.html');
+console.log('https://github.com/Clou2Dy/Rs-Clone/pull/6');
 
 
 

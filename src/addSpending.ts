@@ -5,13 +5,14 @@ var text:any
 export  function addUnd():any {
     document.querySelector('.balanceChange').addEventListener('click',()=>{
         document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
-        if(+document.querySelector('.itogoMoney').textContent > 0 ){
-            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'green'
-            }else if (+document.querySelector('.itogoMoney').textContent < 0 ){
-            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'red'
+        if(+document.querySelector('.balance').textContent > 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'green'
+            }else if (+document.querySelector('.balance').textContent < 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'red'
             }else{
-            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'white'
+            document.querySelector<HTMLElement>('.balance').style.color = 'white'
             }
+        localStorage.setItem('itogo', document.querySelector('.balance').textContent)
     })
     document.addEventListener('click',(el:any)=>{
         if (el.target.classList.contains('date') === true){
@@ -48,6 +49,19 @@ export  function addUnd():any {
             document.querySelector(`.${el.target.closest(".block").classList[1]}`).remove()
             localStorage.setItem('spending', document.querySelector('.spending').innerHTML)
             localStorage.setItem('income', document.querySelector('.income').innerHTML)
+            
+            if(el.target.closest('.IncomeActive')){
+                document.querySelector<any>('.balance').textContent = +document.querySelector('.balance').textContent - +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                document.querySelector<any>('.spentMoney').textContent = +document.querySelector('.spentMoney').textContent - +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                localStorage.setItem('itogo', document.querySelector('.balance').textContent)
+                localStorage.setItem('spent', document.querySelector('.spentMoney').textContent)               
+            }
+            else{
+                document.querySelector<any>('.balance').textContent = +document.querySelector('.balance').textContent + +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                document.querySelector<any>('.spentMoney').textContent = +document.querySelector('.spentMoney').textContent - +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                localStorage.setItem('itogo', document.querySelector('.balance').textContent)
+                localStorage.setItem('spent', document.querySelector('.spentMoney').textContent)
+            }
         }
     })
 }
