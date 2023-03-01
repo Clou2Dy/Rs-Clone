@@ -21,7 +21,7 @@ export default function addSpending (){
         document.querySelector<HTMLElement>('.income')!.style.display = 'block'
         document.querySelector<HTMLElement>('.spending')!.style.display = 'none'
     })
-    document.querySelector('.categorySecurity')!.addEventListener('click', ()=>{
+    document.querySelector('.categorySecurity').addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.security-page')!.style.display = 'block'
     })
     document.querySelector('.paragraphExpenses').addEventListener('click', ()=>{
