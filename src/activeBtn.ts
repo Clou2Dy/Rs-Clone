@@ -12,13 +12,13 @@ export function checkInp(){
 
 export function moneyCount (){
     if(localStorage.getItem('itogo')){
-        document.querySelector('.itogoMoney').textContent = localStorage.getItem('itogo')
-        if(+document.querySelector('.itogoMoney').textContent > 0 ){
-            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'green'
-            }else if (+document.querySelector('.itogoMoney').textContent < 0 ){
-            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'red'
+        document.querySelector('.balance').textContent = localStorage.getItem('itogo')
+        if(+document.querySelector('.balance').textContent > 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'green'
+            }else if (+document.querySelector('.balance').textContent < 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'red'
             }else{
-            document.querySelector<HTMLElement>('.itogoMoney').style.color = 'white'
+            document.querySelector<HTMLElement>('.balance').style.color = 'white'
             }
     }
     if(localStorage.getItem('spent')){
@@ -28,26 +28,26 @@ export function moneyCount (){
     document.querySelector<HTMLButtonElement>('.disa').addEventListener('click', ()=>{
     let spent:number = +document.querySelector('.spentMoney').textContent
     // let earned:number = +document.querySelector('.earnedMoney').textContent
-    let itogo:number = +document.querySelector('.itogoMoney').textContent
+    let itogo:number = +document.querySelector('.balance').textContent
     let val = +document.querySelector<HTMLInputElement>('.inpMoney').value;
-    // document.querySelector('.itogoMoney').textContent = String(itogo)
+    // document.querySelector('.balance').textContent = String(itogo)
     document.querySelector('.spentMoney').textContent = String(spent+val)
     // document.querySelector('.earnedMoney').textContent = String(earned+val)
     if(document.querySelector('.paragraphIncomeActive')){
-    document.querySelector('.itogoMoney').textContent = String(itogo+val)
+    document.querySelector('.balance').textContent = String(itogo+val)
     console.log(itogo+val)
     }else{
-    document.querySelector('.itogoMoney').textContent = String(itogo-val)
+    document.querySelector('.balance').textContent = String(itogo-val)
     console.log(itogo-val);
     }
-    if(+document.querySelector('.itogoMoney').textContent > 0 ){
-    document.querySelector<HTMLElement>('.itogoMoney').style.color = 'green'
-    }else if (+document.querySelector('.itogoMoney').textContent < 0 ){
-    document.querySelector<HTMLElement>('.itogoMoney').style.color = 'red'
+    if(+document.querySelector('.balance').textContent > 0 ){
+    document.querySelector<HTMLElement>('.balance').style.color = 'green'
+    }else if (+document.querySelector('.balance').textContent < 0 ){
+    document.querySelector<HTMLElement>('.balance').style.color = 'red'
     }else{
-    document.querySelector<HTMLElement>('.itogoMoney').style.color = 'white'
+    document.querySelector<HTMLElement>('.balance').style.color = 'white'
     }
-    localStorage.setItem('itogo', document.querySelector('.itogoMoney').textContent)
+    localStorage.setItem('itogo', document.querySelector('.balance').textContent)
     localStorage.setItem('spent', document.querySelector('.spentMoney').textContent)
     })
        
