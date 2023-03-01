@@ -56,6 +56,10 @@ export function block(){
             link = document.querySelector('.income')
         }
     })
+
+    document.querySelector('.balanceChange').addEventListener('click',()=>{
+        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+    })
     
     document.querySelector('.disa').addEventListener('click', ()=>{
         i++
