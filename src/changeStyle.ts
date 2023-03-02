@@ -1,5 +1,6 @@
 import {moneyCount, checkInp } from "./activeBtn"
 export default function addSpending (){
+    document.querySelector<HTMLElement>('.security-page').style.display = 'none'
     document.querySelector('.addExpenses').addEventListener('click', ()=>{
         document.querySelector<HTMLElement>('.changeMoney').style.display = 'block'
         // document.querySelector<HTMLElement>('.zatemFon').style.display = 'block'

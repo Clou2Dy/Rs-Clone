@@ -5,10 +5,14 @@ import {securitiesArray} from './app'
 import {displayListSecurities, handleSecurityClick} from './animationPage'
 import {renderSearchPage} from './searchPage'
 import {Security} from './types'
-import {setTotalPortfolioValue} from './app'
+import {setTotalPortfolioValue, getTotalPortfolioValue} from './app'
 
+let securitiesPage: HTMLElement;
 export async function displaySecurityPage(array: Security[]) {
-    const securitiesPage = createElement('section', null, 'security-page');
+    if (securitiesPage) {
+        document.body.removeChild(securitiesPage);
+    }
+    securitiesPage = createElement('section', null, 'security-page');
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');   
     securitiesPage.appendChild(securitiesPageContainer);
@@ -36,6 +40,7 @@ async function renderHeaderBlock(container: HTMLElement){
     const lastPriceArray = await updateSecuritiesArray(securitiesArray);
     const totalPortfolioValue = calculateTotalSum(lastPriceArray);
     setTotalPortfolioValue(totalPortfolioValue);
+    getTotalPortfolioValue();
     const totalResult  = +calculateTotalProfit(lastPriceArray).toFixed(2);
     const headerPage = createElement('div', null, 'header-information');
     container.appendChild(headerPage);
@@ -66,12 +71,11 @@ async function renderHeaderBlock(container: HTMLElement){
 
             const periodBlock = createElement('div', null, 'period-block');
                 headerBlockProfit.appendChild(periodBlock);
-                const periodAll = createElement('span', 'фин. результат за все время ', 'period-all');
+                const periodAll = createElement('span', 'фин. результат', 'period-all');
                 periodBlock.appendChild(periodAll);
 }
 
 async function renderSecurityBlock(name: string, type: string, container: HTMLElement, array: Security[]) {
-    console.dir(array)
     const getTypeArray = array.filter(el => el.type === type)
     const lastPriceArray = await updateSecuritiesArray(getTypeArray);
     const totalSum = calculateTotalSum (lastPriceArray);

@@ -74,15 +74,14 @@ export function createStockBlock(name: string | null, ticker: string | null, las
       };
 
       alert(`Вы приобрели ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
-      addSecurityToPortfolio(newSecurity);
-      newArraySecurity = addSecurityToPortfolio(newSecurity);
+      securityPage?.removeChild(stockInfoBlock);
+      securityPage?.removeChild(backgroundDimming);
+      displaySecurityPage(addSecurityToPortfolio(newSecurity));
     });
 
     closeButton.addEventListener('click', () => {
       securityPage?.removeChild(stockInfoBlock);
       securityPage?.removeChild(backgroundDimming);
-      console.dir(newArraySecurity);
-      displaySecurityPage(newArraySecurity);
     });
   
     stockInfoBlock.appendChild(inputContainer);
@@ -94,18 +93,7 @@ export function createStockBlock(name: string | null, ticker: string | null, las
 }
 
 export function addSecurityToPortfolio(security: Security) {
-  const existingSecurity = securitiesArray.find(security => security.ticker === security.ticker);
-  let newsecuritiesArray: Security[] = []
-  if (existingSecurity) {
-    const newAmount = existingSecurity.amount + security.amount;
-    const newPurchasePrice = (existingSecurity.purchasePrice * existingSecurity.amount + security.purchasePrice * security.amount) / newAmount;
-
-    existingSecurity.amount = newAmount;
-    existingSecurity.purchasePrice = newPurchasePrice;
-  } else {
-    securitiesArray.push(security);
-    newsecuritiesArray = securitiesArray;
-  }
-  localStorage.setItem('securitiesArray', JSON.stringify(newsecuritiesArray));
+  securitiesArray.push(security);
+  localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
   return securitiesArray
 }

@@ -1,3 +1,5 @@
+import {getTotalPortfolioValue} from './app'
+
 export function checkInp(){
     document.querySelector<HTMLButtonElement>('.disa').disabled = true 
     document.querySelector('.inpMoney').addEventListener('input',function(){
@@ -12,7 +14,7 @@ export function checkInp(){
 
 export function moneyCount (){
     if(localStorage.getItem('itogo')){
-        document.querySelector('.balance').textContent = localStorage.getItem('itogo')
+        document.querySelector('.balance').textContent = localStorage.getItem('itogo');
         if(+document.querySelector('.balance').textContent > 0 ){
             document.querySelector<HTMLElement>('.balance').style.color = 'green'
             }else if (+document.querySelector('.balance').textContent < 0 ){

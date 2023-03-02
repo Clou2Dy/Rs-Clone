@@ -1,7 +1,7 @@
 import {createElement} from './functions'
 import {Security} from './types'
 import {securitiesArray, getTotalPortfolioValue} from './app'
-
+import {displaySecurityPage} from './renderPage'
 
 export function updateStockBlock(security: Security, lastPrice: string | null) {
     const securityPage = document.querySelector('.security-page');
@@ -23,16 +23,17 @@ export function updateStockBlock(security: Security, lastPrice: string | null) {
     addToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
       const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
-      updateSecurityToPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value));
+      displaySecurityPage(updateSecurityToPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value)));
       alert(`Вы приобрели ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
       securityPage?.removeChild(stockInfoBlock);
       securityPage?.removeChild(backgroundDimming);
+
     });
 
     removeToPortfolioButton.addEventListener('click', () => {
       const purchasePriceInput = document.querySelector('.purchase-price-input') as HTMLInputElement;
       const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
-      removeSecurityFromPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value));
+      displaySecurityPage(removeSecurityFromPortfolio(security.ticker, Number(purchasePriceInput.value), Number(quantityInput.value)));
       alert(`Вы продали ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
       securityPage?.removeChild(stockInfoBlock);
       securityPage?.removeChild(backgroundDimming);
@@ -139,6 +140,7 @@ function updateSecurityToPortfolio(ticker: string, purchasePrice: number, quanti
     matchingSecurity.purchasePrice = newPurchasePrice;
 
     localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
+    return securitiesArray;
   }
 }
 
@@ -152,7 +154,6 @@ function removeSecurityFromPortfolio(ticker: string, purchasePrice: number, quan
       matchingSecurity.amount = newAmount;
     }
     localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
-    return purchasePrice * quantity;
+    return securitiesArray;
   }
-  return 0;
 }
