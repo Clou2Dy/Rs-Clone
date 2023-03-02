@@ -9,13 +9,15 @@ export function updateStockBlock(security: Security, lastPrice: string | null) {
     const inputContainer = createUpdateContainer();
     const backgroundDimming = createElement('div', null, 'background-dimming');
     const closeButton = createElement('div', null, 'close-button');
+    const buttonsWrapper = createElement('div', null, 'buttons-wrapper');
     const addToPortfolioButton = createElement('button', 'Покупка', 'add-to-portfolio-button');
     const removeToPortfolioButton = createElement('button', 'Продажа', 'remove-to-portfolio-button');
 
     stockInfoBlock.appendChild(inputContainer);
     stockInfoBlock.appendChild(closeButton);
-    stockInfoBlock.appendChild(addToPortfolioButton);
-    stockInfoBlock.appendChild(removeToPortfolioButton);
+    stockInfoBlock.appendChild(buttonsWrapper);
+    buttonsWrapper.appendChild(addToPortfolioButton);
+    buttonsWrapper.appendChild(removeToPortfolioButton);
     securityPage?.appendChild(stockInfoBlock);
     securityPage?.appendChild(backgroundDimming);
     stockInfoBlock.classList.add('show'); /* add the 'show' class */

@@ -510,9 +510,12 @@
   content: ".";
 }
 
+.buttons-wrapper{
+  display: flex;
+  gap: 10px;
+}
 .add-to-portfolio-button {
   cursor: pointer;
-  width: 45%;
   height: 40px;
   border: none;
   border-radius: 20px;
@@ -522,7 +525,6 @@
 
 .remove-to-portfolio-button{
   cursor: pointer;
-  width: 45%;
   height: 40px;
   border: none;
   border-radius: 20px;
