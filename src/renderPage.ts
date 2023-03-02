@@ -4,15 +4,16 @@ import {updateSecuritiesArray} from './datta'
 import {securitiesArray} from './app'
 import {displayListSecurities, handleSecurityClick} from './animationPage'
 import {renderSearchPage} from './searchPage'
-export let totalPortfolioValue: number;
+import {Security} from './types'
+import {setTotalPortfolioValue} from './app'
 
-export async function displaySecurityPage() {
+export async function displaySecurityPage(array: Security[]) {
     const securitiesPage = createElement('section', null, 'security-page');
     document.body.appendChild(securitiesPage);
     const securitiesPageContainer = createElement('div', null, 'security-page__container');   
     securitiesPage.appendChild(securitiesPageContainer);
     const closeMainButton = createElement('div', null, 'close-main-button');
-    securitiesPage.appendChild(closeMainButton);
+    securitiesPageContainer.appendChild(closeMainButton);
 
     const headerBlock = createElement('div', null, 'header-block');
     securitiesPageContainer.appendChild(headerBlock);
@@ -21,19 +22,20 @@ export async function displaySecurityPage() {
 
     await renderHeaderBlock(headerBlock);
     await renderAddButton(headerBlock);
-    await renderSecurityBlock('Акции', 'stock', mainBlock);
-    await renderSecurityBlock('Облигации','bond', mainBlock);
-    await renderSecurityBlock('БПИФ', 'etf', mainBlock);
+    await renderSecurityBlock('Акции', 'stock', mainBlock, array);
+    await renderSecurityBlock('Облигации','bond', mainBlock, array);
+    await renderSecurityBlock('БПИФ', 'etf', mainBlock, array);
     handleSecurityClick();
 
     closeMainButton.addEventListener('click', () => {
         securitiesPage.style.display = 'none'
-      });
+    });
 }
 
 async function renderHeaderBlock(container: HTMLElement){
     const lastPriceArray = await updateSecuritiesArray(securitiesArray);
-    totalPortfolioValue = calculateTotalSum (lastPriceArray);
+    const totalPortfolioValue = calculateTotalSum(lastPriceArray);
+    setTotalPortfolioValue(totalPortfolioValue);
     const totalResult  = +calculateTotalProfit(lastPriceArray).toFixed(2);
     const headerPage = createElement('div', null, 'header-information');
     container.appendChild(headerPage);
@@ -68,8 +70,9 @@ async function renderHeaderBlock(container: HTMLElement){
                 periodBlock.appendChild(periodAll);
 }
 
-async function renderSecurityBlock(name: string, type: string, container: HTMLElement) {
-    const getTypeArray = securitiesArray.filter(el => el.type === type)
+async function renderSecurityBlock(name: string, type: string, container: HTMLElement, array: Security[]) {
+    console.dir(array)
+    const getTypeArray = array.filter(el => el.type === type)
     const lastPriceArray = await updateSecuritiesArray(getTypeArray);
     const totalSum = calculateTotalSum (lastPriceArray);
     const totalResult = +calculateTotalProfit(lastPriceArray).toFixed(2);
@@ -119,13 +122,13 @@ function renderAddButton(container: HTMLElement) {
     inputElement.addEventListener('click', () => {
         inputElement.defaultValue = '';
         mainBlock.style.display = 'none';
-        renderSearchPage();
         closeButtonInput.style.display = 'block';
+        renderSearchPage();
     });
 
     closeButtonInput.addEventListener('click', () => {
         inputElement.defaultValue = 'Компания, тикер, ISIN';
-        mainBlock.style.display = 'block';
+        mainBlock.style.display = 'flex';
         const searchBlock = document.querySelector('.search-block') as HTMLElement;
         searchBlock.style.display = 'none';
         closeButtonInput.style.display = 'none';

@@ -24,8 +24,8 @@ export async function getStocksTickers() {
     const response = await fetch('https://iss.moex.com/iss/engines/stock/markets/shares/securities/.json');
     const json = await response.json();
     const data =  json.securities.data;
-    console.dir (data)
     const tqbr = data.filter((elem: Array<string | number>) => elem[1] === 'TQBR');
+    console.dir (tqbr)
     return tqbr;
   } catch (error) {
     console.error(error);

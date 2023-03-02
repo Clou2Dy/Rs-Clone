@@ -8,9 +8,15 @@ import {displaySecurityPage} from './renderPage'
 import {Security} from './types'
 
 export let securitiesArray: Security[] = JSON.parse(localStorage.getItem('securitiesArray') || '[]');
+export let totalPortfolioValue: number;
+export function setTotalPortfolioValue(value: number) {
+    totalPortfolioValue = value;
+}
+export function getTotalPortfolioValue() {
+    return totalPortfolioValue;
+}
 
-
-displaySecurityPage();
+displaySecurityPage(securitiesArray);
 
 progress()
 data()
@@ -19,4 +25,4 @@ addSpending()
 addUnd()
 income()
 
-alert('Доброго врмени суток, не могли бы вы проверить нашу работу в конце кросс чека. Заранее благодарим и целуем. ♡♡♡')
+//alert('Доброго врмени суток, не могли бы вы проверить нашу работу в конце кросс чека. Заранее благодарим и целуем. ♡♡♡')

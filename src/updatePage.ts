@@ -1,7 +1,7 @@
 import {createElement} from './functions'
 import {Security} from './types'
-import {securitiesArray} from './app'
-import {totalPortfolioValue} from './renderPage'
+import {securitiesArray, getTotalPortfolioValue} from './app'
+
 
 export function updateStockBlock(security: Security, lastPrice: string | null) {
     const securityPage = document.querySelector('.security-page');
@@ -53,7 +53,7 @@ function updateStockInfoBlock(name: string | null, ticker: string, lastPrice: st
     const priceBlock = createElement('div', null, 'price-information');
     const priceText = createElement('div', 'Стоимость ценных бумаг', 'price-text');
     const purchasePrice = calculateTotalPurchasePrice(securitiesArray, ticker, lastPrice);
-    const percentage = (100*(purchasePrice / totalPortfolioValue)).toFixed(2);
+    const percentage = (100*(purchasePrice / getTotalPortfolioValue())).toFixed(2);
     const priceValue = createElement('div', `${purchasePrice || ''} ₽`, 'price-value');
     const portfolioPercentage = createElement('div', `${percentage} % от портфеля`, 'portfolio-percentage');
     const financialResultsText = createElement('div', `Фин. результат за все время`, 'financial-result-text');

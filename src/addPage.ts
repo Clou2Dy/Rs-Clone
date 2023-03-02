@@ -49,13 +49,14 @@ export function createInputContainer(): HTMLElement {
     return inputContainer;
   }
   
-  export function createStockBlock(name: string | null, ticker: string | null, last: string | null) {
+export function createStockBlock(name: string | null, ticker: string | null, last: string | null) {
     const securityPage = document.querySelector('.security-page')
     const backgroundDimming = createElement('div', null, 'background-dimming');
     const stockInfoBlock = createStockInfoBlock(name, ticker, last);
     const inputContainer = createInputContainer();
     const closeButton = createElement('div', null, 'close-button');
   
+    let newArraySecurity: Security[] = [];
     const addToPortfolioButton = createElement('button', 'Покупка', 'add-to-portfolio-button');
     addToPortfolioButton.id = 'add-stock-button';
     addToPortfolioButton.addEventListener('click', () => {
@@ -73,15 +74,15 @@ export function createInputContainer(): HTMLElement {
       };
 
       alert(`Вы приобрели ценные бумаги на сумму ${Number(purchasePriceInput.value) * Number(quantityInput.value)} ₽`)
-      securityPage?.removeChild(stockInfoBlock);
-      securityPage?.removeChild(backgroundDimming);
       addSecurityToPortfolio(newSecurity);
-      displaySecurityPage();
+      newArraySecurity = addSecurityToPortfolio(newSecurity);
     });
 
     closeButton.addEventListener('click', () => {
       securityPage?.removeChild(stockInfoBlock);
       securityPage?.removeChild(backgroundDimming);
+      console.dir(newArraySecurity);
+      displaySecurityPage(newArraySecurity);
     });
   
     stockInfoBlock.appendChild(inputContainer);
@@ -93,6 +94,18 @@ export function createInputContainer(): HTMLElement {
 }
 
 export function addSecurityToPortfolio(security: Security) {
+  const existingSecurity = securitiesArray.find(security => security.ticker === security.ticker);
+  let newsecuritiesArray: Security[] = []
+  if (existingSecurity) {
+    const newAmount = existingSecurity.amount + security.amount;
+    const newPurchasePrice = (existingSecurity.purchasePrice * existingSecurity.amount + security.purchasePrice * security.amount) / newAmount;
+
+    existingSecurity.amount = newAmount;
+    existingSecurity.purchasePrice = newPurchasePrice;
+  } else {
     securitiesArray.push(security);
-    localStorage.setItem('securitiesArray', JSON.stringify(securitiesArray));
+    newsecuritiesArray = securitiesArray;
+  }
+  localStorage.setItem('securitiesArray', JSON.stringify(newsecuritiesArray));
+  return securitiesArray
 }

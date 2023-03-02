@@ -128,6 +128,14 @@
   transform: rotate(-45deg);
 }
 /*********************SECURITIES**************************/
+.main-block{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.main-block_darkened {
+  opacity: 0.2;
+}
 .stock-info,
 .bond-info,
 .etf-info
