@@ -3,6 +3,18 @@ import * as moment from "moment"
 let img:string 
 var text:any
 export  function addUnd():any {
+    document.querySelector('.balanceChange').addEventListener('click',()=>{
+        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+        if(+document.querySelector('.balance').textContent > 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'green'
+            }else if (+document.querySelector('.balance').textContent < 0 ){
+            document.querySelector<HTMLElement>('.balance').style.color = 'red'
+            }else{
+            document.querySelector<HTMLElement>('.balance').style.color = 'white'
+            document.querySelector<HTMLElement>('.balance').style.color = 'white'
+            }
+        localStorage.setItem('itogo', document.querySelector('.balance').textContent)
+    })
     document.addEventListener('click',(el:any)=>{
         if (el.target.classList.contains('date') === true){
             document.getElementById('expensesDay')!.classList.remove('back')
@@ -36,11 +48,32 @@ export  function addUnd():any {
     addEventListener('click', (el:any)=>{
         if(el.target.className === 'delete'){
             document.querySelector(`.${el.target.closest(".block").classList[1]}`).remove()
+            localStorage.setItem('spending', document.querySelector('.spending').innerHTML)
+            localStorage.setItem('income', document.querySelector('.income').innerHTML)
+            
+            if(el.target.closest('.IncomeActive')){
+                document.querySelector<any>('.balance').textContent = +document.querySelector('.balance').textContent - +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                document.querySelector<any>('.spentMoney').textContent = +document.querySelector('.spentMoney').textContent - +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                localStorage.setItem('itogo', document.querySelector('.balance').textContent)
+                localStorage.setItem('spent', document.querySelector('.spentMoney').textContent)               
+            }
+            else{
+                document.querySelector<any>('.balance').textContent = +document.querySelector('.balance').textContent + +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                document.querySelector<any>('.spentMoney').textContent = +document.querySelector('.spentMoney').textContent - +el.target.parentElement.querySelector('.rasxoMoney').textContent.replace(/[a-zа-яё]/gi, '')
+                localStorage.setItem('itogo', document.querySelector('.balance').textContent)
+                localStorage.setItem('spent', document.querySelector('.spentMoney').textContent)
+            }
         }
     })
 }
 
 export function block(){
+    if(localStorage.getItem('spending')){
+        document.querySelector('.spending').insertAdjacentHTML('afterbegin',localStorage.getItem('spending'))  
+    }
+    if(localStorage.getItem('income')){
+        document.querySelector('.income').insertAdjacentHTML('afterbegin',localStorage.getItem('income'))  
+    }
     let i = 0
     let form  = ('DD.MM.YYYY'+' '+'HH:mm'+"")
     let time = moment().format(form)
@@ -56,17 +89,25 @@ export function block(){
             link = document.querySelector('.income')
         }
     })
+
+    document.querySelector('.balanceChange').addEventListener('click',()=>{
+        document.querySelector('.balance').textContent = document.querySelector<HTMLInputElement>('.balanceChangeInput').value
+    })
     
     document.querySelector('.disa').addEventListener('click', ()=>{
+        
         i++
         if(blo === undefined){
             blo = `ExpensesActive`
             link = document.querySelector('.spending')
         }
-        const blockSpending = `<div class='blockContent'> <div class='col imgDiv'><img src = ${img}></div> <div class='col nameSpending'>${text}</div> <div class='col rasxoMoney'>${document.querySelector<HTMLInputElement>('.inpMoney').value +' BYN'}</div> <div class='col procent'> ${document.querySelector('.spentMoney').textContent == String(0) ? '100%' : Math.round((+document.querySelector<any>('.inpMoney').value / +document.querySelector('.spentMoney').textContent) * 100)+'%'}</div> <div class='col expensesDateBlock'>${time}</div> <div class="col dropdown"><button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"><li><a class="dropdown-item" href="#">${document.querySelector<HTMLInputElement>('.inpCom').value}</a></li></ul></div> <div class='delete'></div> </div>`
+        const blockSpending = `<div class='blockContent' id=${text} > <div class='col imgDiv'><img src = ${img}></div> <div class='col nameSpending'>${text}</div> <div class='col rasxoMoney'>${document.querySelector<HTMLInputElement>('.inpMoney').value +' BYN'}</div> <div class='col procent'> ${document.querySelector('.spentMoney').textContent == String(0) ? '100%' : Math.round((+document.querySelector<any>('.inpMoney').value / +document.querySelector('.spentMoney').textContent) * 100)+'%'}</div> <div class='col expensesDateBlock'>${time}</div> <div class="col dropdown"><button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"><li><a class="dropdown-item" href="#">${document.querySelector<HTMLInputElement>('.inpCom').value}</a></li></ul></div> <div class='delete'></div> </div>`
         let block = document.createElement('div')
         block.classList.add(`row`, `block${i}`, `block`, `${blo}`)
         block.innerHTML = blockSpending
         link.appendChild(block)
+        localStorage.setItem('spending', document.querySelector('.spending').innerHTML)
+        localStorage.setItem('income', document.querySelector('.income').innerHTML)
     })
+    
 }

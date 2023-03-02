@@ -618,6 +618,70 @@ body{
         font-size: 30px;
         font-weight: 500;
         margin: 0px;
+        .itogoMoney{
+          display: flex;
+          .buttonChangeMoney{
+            display: none;
+            // position: absolute;
+            // width: 150px;
+            // height: 30px;
+            // font-size: 12px;
+            // margin-top: 10px;
+            // margin-left: 20px;
+            // top: 10px;
+            // left: 56%;
+            .inpButton{
+              display: flex;
+            }
+          }
+          .buttonChangeMoney input{
+            width: 100px;
+            height: 29px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 0px;
+            margin-top: 10px;
+            margin-left: 10px;
+          }
+          .buttonChangeMoney button{
+            margin-top: 10px;
+            width: 100px;
+            height: 29px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 0px;
+          }
+        }
+        .itogoMoney:hover{
+          animation-name: buttonChangeMoneyAnim;
+          animation-duration: 0.4s;
+          animation-fill-mode: forwards;
+          .buttonChangeMoney{
+            display: block;
+            display: flex;
+            justify-content: space-evenly;
+            // font-size: 12px;
+            // overflow: hidden;
+            // margin-top: 10px;
+            // margin-left: 20px;
+            // border-radius: 10px;
+            // padding: 2px;
+            // border-style: none;
+            // background-color:#267952;
+            // color: white;
+
+          }
+        }
+        @keyframes buttonChangeMoneyAnim {
+          0%{
+            width: 20px;
+            height: 20px;
+          }
+          100%{
+            width: 300px;
+            height: 30px;
+          }
+        }
         .itogoImg{
           margin-top: 10px;
           width: 30px;
@@ -644,6 +708,7 @@ body{
   }
 .main{
   flex: 1 1 auto;
+  margin-top: 25px;
 .blockInfo{
   display: flex;
   justify-content: center;
@@ -719,6 +784,9 @@ flex-direction: column;
         width: 5%;
         margin: 0px;
         padding: 0px;
+      }
+      .delete:hover{
+        cursor: pointer;
       }
       .rasxoMoney, .nameSpending, .expensesDateBlock, .procent{
         @include expensTextDecorating;
@@ -846,6 +914,8 @@ flex-direction: column;
     .imgName{
       width: 50px;
     }
+  }
+}
 }
 .footerContainer{
   border-top-right-radius: 20px;
@@ -856,5 +926,33 @@ flex-direction: column;
   bottom: 0px;
   margin-top: -80;
   background-color: rgb(19, 56, 39);
-}}
+  .col{
+    height: 50px;
+  }
+  .gitUl{
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    .gitLogo{
+      width: 100px;
+      height: 50px;
+      mix-blend-mode:darken;
+    }
+  }
+  .yearСreation{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color:black;
+  }
+  .colRsLogo{
+    display: flex;
+    justify-content: center;
+    .rsLogo{
+      width: 100px;
+      height: 50px;
+      mix-blend-mode:multiply;
+    }
+  }
 }

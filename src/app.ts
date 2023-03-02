@@ -6,6 +6,7 @@ import progress from './progressbar';
 import addSpending from './changeStyle';
 import {displaySecurityPage} from './renderPage'
 import {Security} from './types'
+import { incomeExpensesBoreder } from './incomeExpensesBorder';
 
 export let securitiesArray: Security[] = JSON.parse(localStorage.getItem('securitiesArray') || '[]');
 export let totalPortfolioValue: number;
@@ -16,13 +17,19 @@ export function getTotalPortfolioValue() {
     return totalPortfolioValue;
 }
 
-displaySecurityPage(securitiesArray);
 
-progress()
+displaySecurityPage(securitiesArray);
+incomeExpensesBoreder()
 data()
-block()
-addSpending()
 addUnd()
 income()
+addSpending()
+block()
+progress()
 
-//alert('Доброго врмени суток, не могли бы вы проверить нашу работу в конце кросс чека. Заранее благодарим и целуем. ♡♡♡')
+
+alert(`Доброго врмени суток, не могли бы вы проверить нашу работу в конце кросс чека. Заранее благодарим и целуем. ♡♡♡  Ссылка на PR в консоли разработчика`)
+console.log('https://github.com/Clou2Dy/Rs-Clone/pull/6');
+
+
+

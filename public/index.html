@@ -15,23 +15,31 @@
             <div class="container-fluid bigCont">
                 <div class="row headRow">
                     <div class="col-sm-9 colContent">
-                        <div class="itogo">
+                        <div class="itogo ">
                             <div class="itogoImg"></div>
                             Итого:
-                            <div class="itogoMoney">0</div>
+                            <div class="itogoMoney">
+                                <div class="balance">0</div>
+                                <div class="input-group buttonChangeMoney">
+                                    <div class="inpButton">
+                                        <input type="text" class="form-control balanceChangeInput" placeholder="Балланс" aria-label="Username" aria-describedby="input-group-button-right">
+                                        <button type="button" class="btn btn-outline-secondary balanceChange" id="input-group-button-right">Изменить</button>
+                                    </div>
+                                 </div>
+                            </div>
                         </div>
-                    <h3 class="money"></h3>
-                    <div class="row rowExpens">
-                        <div class="col-8 col-sm-6">
-                        <h4 class="underline categoryExpenses">РАСХОДЫ</h4>
+                        <h3 class="money"></h3>
+                            <div class="row rowExpens">
+                            <div class="col-8 col-sm-6">
+                            <h4 class="underline categoryExpenses">РАСХОДЫ</h4>
+                            </div>
+                            <div class="col-4 col-sm-6">
+                            <h4 class="underline categoryIncome">ДОХОДЫ</h4>
+                            </div>
+                            <div class="col-3 col-sm-6">
+                                <h4 class="underline categorySecurity">ЦЕННЫЕ БУМАГИ</h4>
+                            </div>
                         </div>
-                        <div class="col-4 col-sm-6">
-                        <h4 class="underline categoryIncome">ДОХОДЫ</h4>
-                        </div>
-                        <div class="col-3 col-sm-6">
-                            <h4 class="underline categorySecurity">ЦЕННЫЕ БУМАГИ</h4>
-                        </div>
-                    </div>
                     </div>
                 </div> 
             </div>
@@ -61,8 +69,8 @@
             <div class="container-fluid changeMoney">
                 <div class="row headMenu">
                     <i class=" row arrow left"></i>
-                    <div class="col-sm-6 underline paragraphExpenses paragraphExpensesActive">РАСХОДЫ</div>
-                    <div class="col-sm-6 underline paragraphIncome">ДОХОДЫ</div>
+                    <div class="underline col-sm-6 paragraphExpenses paragraphExpensesActive">РАСХОДЫ</div>
+                    <div class="underline col-sm-6 paragraphIncome">ДОХОДЫ</div>
                     <input type="number" class="inpMoney">
                 </div>
                     <div class="container-fluid rashod">
@@ -142,9 +150,15 @@
         <footer>
             <div class="container-fluid footerContainer">
                 <div class="row footerRow">
-                    <div class="col"><img src="" alt=""></div>
-                    <div class="col"></div>
-                    <div class="col"></div>
+                    <div class="col">
+                        <ul class="gitUl">
+                            <li> <a href="https://github.com/Clou2Dy" target="_blank"><img class="gitLogo" src="./assets/png-transparent-github-computer-icons-github-logo-monochrome-head.png" alt=""></a></li>
+                            <li> <a href="https://github.com/DocSkullka" target="_blank"><img class="gitLogo" src="./assets/png-transparent-github-computer-icons-github-logo-monochrome-head.png" alt=""></a></li>
+                            <li> <a href="https://github.com/Neiman22" target="_blank"><img class="gitLogo" src="./assets/png-transparent-github-computer-icons-github-logo-monochrome-head.png" alt=""></a></li>
+                        </ul>
+                    </div>
+                    <div class="col yearСreation">2023</div>
+                    <div class="col colRsLogo"><a href="https://rs.school/" target="_blank" ><img class="rsLogo" src="./assets/rs.png" alt="RS school"></a></div>
                 </div>
             </div>
         </footer>
